@@ -47,7 +47,7 @@ def create_app(settings_factory: Callable[[], Settings] | None = None) -> FastAP
     async def lifespan(_: FastAPI) -> AsyncIterator[None]:
         configure_logging(settings.log_level)
         try:
-            if settings.app_env == "evaluation":
+            if settings.app_env == "evaluation" and settings.hcx_startup_smoke_enabled:
                 await application.state.readiness_service.warmup_provider()
             yield
         finally:

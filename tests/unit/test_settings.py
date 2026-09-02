@@ -16,6 +16,7 @@ def test_settings_defaults() -> None:
     assert settings.default_result_limit == 5
     assert settings.max_result_limit == 10
     assert settings.internal_timeout_seconds == 120
+    assert settings.hcx_startup_smoke_enabled is False
 
 
 def test_invalid_app_env_rejected() -> None:
