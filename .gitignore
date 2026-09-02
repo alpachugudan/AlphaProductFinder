@@ -20,3 +20,4 @@ build/
 *.log
 .deploy-ssh/
 source-data/
+.hcx-api
