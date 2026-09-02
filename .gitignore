@@ -18,3 +18,5 @@ build/
 .idea/
 .vscode/
 *.log
+.deploy-ssh/
+source-data/
