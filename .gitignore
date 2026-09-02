@@ -21,3 +21,4 @@ build/
 .deploy-ssh/
 source-data/
 .hcx-api
+backups/
