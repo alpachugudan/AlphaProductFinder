@@ -1,0 +1,2 @@
+{"alias": "삼성전자", "normalized_alias": "삼성전자", "entity_id": "ENT:KR:005930", "alias_type": "KO_NAME", "source_document_id": "doc-samsung-ir-subsidiary-202606", "match_method": "EXACT", "review_status": "APPROVED"}
+{"alias": "Samsung Electronics", "normalized_alias": "samsung electronics", "entity_id": "ENT:KR:005930", "alias_type": "EN_NAME", "source_document_id": "doc-samsung-ir-subsidiary-202606", "match_method": "EXACT", "review_status": "APPROVED"}

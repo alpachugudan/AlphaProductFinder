@@ -1,0 +1,16 @@
+{
+  "version": "1.0",
+  "intent": "FILTER",
+  "product_families": ["BOND_KR"],
+  "entities": [],
+  "filters": [
+    {"field": "remaining_days", "operator": "LTE", "value": 365}
+  ],
+  "relationship_filters": [],
+  "metrics": ["remaining_days", "applied_yield"],
+  "preferences": [],
+  "sort": [],
+  "limit": 5,
+  "as_of_requirement": "SHOW_FIELD_DATE",
+  "missing_policy": "EXCLUDE_AND_DISCLOSE"
+}

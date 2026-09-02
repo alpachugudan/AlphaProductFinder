@@ -1,0 +1,75 @@
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix pf: <http://miraeasset.product-finder/ontology/common#> .
+
+pf:FinancialProduct a owl:Class ;
+  rdfs:label "Financial Product"@en, "금융상품"@ko .
+
+pf:Bond a owl:Class ;
+  rdfs:subClassOf pf:FinancialProduct ;
+  rdfs:label "Bond"@en, "채권"@ko .
+
+pf:ETF a owl:Class ;
+  rdfs:subClassOf pf:FinancialProduct ;
+  rdfs:label "ETF"@en .
+
+pf:Fund a owl:Class ;
+  rdfs:subClassOf pf:FinancialProduct ;
+  rdfs:label "Fund"@en, "펀드"@ko .
+
+pf:Company a owl:Class ;
+  rdfs:label "Company"@en, "기업"@ko .
+
+pf:Index a owl:Class ;
+  rdfs:label "Index"@en, "지수"@ko .
+
+pf:Theme a owl:Class ;
+  rdfs:label "Theme"@en, "테마"@ko .
+
+pf:Sector a owl:Class ;
+  rdfs:label "Sector"@en, "섹터"@ko .
+
+pf:Metric a owl:Class ;
+  rdfs:label "Metric"@en, "지표"@ko .
+
+pf:Evidence a owl:Class ;
+  rdfs:label "Evidence"@en, "근거"@ko .
+
+pf:hasIssuer a owl:ObjectProperty ;
+  rdfs:domain pf:FinancialProduct ;
+  rdfs:range pf:Company .
+
+pf:managedBy a owl:ObjectProperty ;
+  rdfs:domain pf:FinancialProduct ;
+  rdfs:range pf:Company .
+
+pf:investsIn a owl:ObjectProperty ;
+  rdfs:domain pf:FinancialProduct ;
+  rdfs:range pf:Company .
+
+pf:holdsCompany a owl:ObjectProperty ;
+  rdfs:domain pf:FinancialProduct ;
+  rdfs:range pf:Company .
+
+pf:tracksIndex a owl:ObjectProperty ;
+  rdfs:domain pf:ETF ;
+  rdfs:range pf:Index .
+
+pf:belongsToTheme a owl:ObjectProperty ;
+  rdfs:domain pf:FinancialProduct ;
+  rdfs:range pf:Theme .
+
+pf:subsidiaryOf a owl:ObjectProperty ;
+  rdfs:domain pf:Company ;
+  rdfs:range pf:Company .
+
+pf:hasMetric a owl:ObjectProperty ;
+  rdfs:domain pf:FinancialProduct ;
+  rdfs:range pf:Metric .
+
+pf:hasAsOfDate a owl:DatatypeProperty ;
+  rdfs:domain pf:Metric .
+
+pf:supportedByEvidence a owl:ObjectProperty ;
+  rdfs:domain pf:Metric ;
+  rdfs:range pf:Evidence .

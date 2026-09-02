@@ -1,0 +1,723 @@
+{
+  "schema_version": "golden-report-1.0",
+  "provider": "mock",
+  "dataset_version": "2026-07-11-baseline",
+  "external_manifest_hash": "c8aae6c2d91a7aee6f2614ca0723bc9e820bb25f2607b95253ebcc5d646a3d58",
+  "case_count": 50,
+  "passed_count": 46,
+  "failed_count": 4,
+  "all_passed": false,
+  "cases": [
+    {
+      "case_id": "G-001",
+      "axis": "single_product_lookup",
+      "question_sha256": "ca5e59fc37d47d9c832e54e6614124025226e431a8dea96c4e7e379ae6d624de",
+      "elapsed_ms": 135,
+      "passed": true,
+      "failures": [],
+      "decision": "ANSWER",
+      "reason_codes": [
+        "EVIDENCE_READY"
+      ],
+      "candidate_count": 5,
+      "evidence_hash_present": true
+    },
+    {
+      "case_id": "G-002",
+      "axis": "single_product_lookup",
+      "question_sha256": "01b5c3e23b0bcc5ae8a75b2ccb3a8e5b49c11b70be77257ed9d6cf3f55b729a9",
+      "elapsed_ms": 62,
+      "passed": true,
+      "failures": [],
+      "decision": "ANSWER",
+      "reason_codes": [
+        "EVIDENCE_READY"
+      ],
+      "candidate_count": 5,
+      "evidence_hash_present": true
+    },
+    {
+      "case_id": "G-003",
+      "axis": "single_product_lookup",
+      "question_sha256": "189db77e2c5ac6954c86d7a03d1911e42a7191e8c60a15ee860eb77663aa6d5e",
+      "elapsed_ms": 101,
+      "passed": true,
+      "failures": [],
+      "decision": "ANSWER",
+      "reason_codes": [
+        "EVIDENCE_READY"
+      ],
+      "candidate_count": 5,
+      "evidence_hash_present": true
+    },
+    {
+      "case_id": "G-004",
+      "axis": "hard_filter",
+      "question_sha256": "bfe3cb278f2a9010f6c2301737c31859ce47102ec6c11907b40e4b6dc6eea6f2",
+      "elapsed_ms": 664,
+      "passed": true,
+      "failures": [],
+      "decision": "ANSWER",
+      "reason_codes": [
+        "EVIDENCE_READY"
+      ],
+      "candidate_count": 5,
+      "evidence_hash_present": true
+    },
+    {
+      "case_id": "G-005",
+      "axis": "hard_filter",
+      "question_sha256": "71d716ce509be71dc998bdb057c80b4ffa543fc2f62edfbf56b5133c1f7e6654",
+      "elapsed_ms": 83,
+      "passed": true,
+      "failures": [],
+      "decision": "ANSWER",
+      "reason_codes": [
+        "EVIDENCE_READY"
+      ],
+      "candidate_count": 5,
+      "evidence_hash_present": true
+    },
+    {
+      "case_id": "G-006",
+      "axis": "hard_filter",
+      "question_sha256": "83ad6c76c4642565c38bc8a11e17132645a121b7c974d3bc1cb9b001c4c36317",
+      "elapsed_ms": 117,
+      "passed": true,
+      "failures": [],
+      "decision": "ANSWER",
+      "reason_codes": [
+        "EVIDENCE_READY"
+      ],
+      "candidate_count": 5,
+      "evidence_hash_present": true
+    },
+    {
+      "case_id": "G-007",
+      "axis": "hard_filter",
+      "question_sha256": "5aebf2c0da253854d2476ada043b54c1297976c7b9192ec39a3345419c24c67e",
+      "elapsed_ms": 603,
+      "passed": true,
+      "failures": [],
+      "decision": "ANSWER",
+      "reason_codes": [
+        "EVIDENCE_READY"
+      ],
+      "candidate_count": 5,
+      "evidence_hash_present": true
+    },
+    {
+      "case_id": "G-008",
+      "axis": "sort_topn",
+      "question_sha256": "d69fa83b19c4d4a0243b2602104b10d9385a5956b7e679317ebe7e6c79216f99",
+      "elapsed_ms": 581,
+      "passed": true,
+      "failures": [],
+      "decision": "ANSWER",
+      "reason_codes": [
+        "EVIDENCE_READY"
+      ],
+      "candidate_count": 5,
+      "evidence_hash_present": true
+    },
+    {
+      "case_id": "G-009",
+      "axis": "sort_topn",
+      "question_sha256": "f5705c2de186377b236b606fa87e80c6bf6c755dd1a0f5977287adc632c5fc54",
+      "elapsed_ms": 2007,
+      "passed": false,
+      "failures": [
+        "decision:ABSTAIN!=ANSWER",
+        "candidate_count:0<1"
+      ],
+      "decision": "ABSTAIN",
+      "reason_codes": [
+        "QUALITY_BLOCKED"
+      ],
+      "candidate_count": 0,
+      "evidence_hash_present": false
+    },
+    {
+      "case_id": "G-010",
+      "axis": "sort_topn",
+      "question_sha256": "bf66e4426f439edc9cbc1b871761d461c808136fe3c900f16a3c0f8839f58002",
+      "elapsed_ms": 189,
+      "passed": true,
+      "failures": [],
+      "decision": "ANSWER",
+      "reason_codes": [
+        "EVIDENCE_READY"
+      ],
+      "candidate_count": 5,
+      "evidence_hash_present": true
+    },
+    {
+      "case_id": "G-011",
+      "axis": "compare_products",
+      "question_sha256": "431db06ce6f24f965370ad81972a03a62e9eceb8dc40dd484bcc1242f1d0d477",
+      "elapsed_ms": 107,
+      "passed": true,
+      "failures": [],
+      "decision": "ANSWER",
+      "reason_codes": [
+        "EVIDENCE_READY"
+      ],
+      "candidate_count": 5,
+      "evidence_hash_present": true
+    },
+    {
+      "case_id": "G-012",
+      "axis": "compare_products",
+      "question_sha256": "8b3f2a900924966ebcf058f89226bde7b3cb5691497a31090ed0af4b1a6905cf",
+      "elapsed_ms": 76,
+      "passed": true,
+      "failures": [],
+      "decision": "ANSWER",
+      "reason_codes": [
+        "EVIDENCE_READY"
+      ],
+      "candidate_count": 5,
+      "evidence_hash_present": true
+    },
+    {
+      "case_id": "G-013",
+      "axis": "multi_preference",
+      "question_sha256": "04c0176ec3b8517d44cd697470f087deee4bc4629aae572ac915889307af76ce",
+      "elapsed_ms": 190,
+      "passed": true,
+      "failures": [],
+      "decision": "ANSWER",
+      "reason_codes": [
+        "EVIDENCE_READY"
+      ],
+      "candidate_count": 5,
+      "evidence_hash_present": true
+    },
+    {
+      "case_id": "G-014",
+      "axis": "multi_preference",
+      "question_sha256": "a1d05f6f986d0ddfa3004ec896803cd6023ac37f683b1caa8cf05e6948509f4e",
+      "elapsed_ms": 180,
+      "passed": true,
+      "failures": [],
+      "decision": "ANSWER",
+      "reason_codes": [
+        "EVIDENCE_READY"
+      ],
+      "candidate_count": 3,
+      "evidence_hash_present": true
+    },
+    {
+      "case_id": "G-015",
+      "axis": "multi_preference",
+      "question_sha256": "8bab96b067fa52b2f1cda933fd66fe43e0a67d39d156a47cdc1f5962bb53241c",
+      "elapsed_ms": 666,
+      "passed": true,
+      "failures": [],
+      "decision": "ANSWER",
+      "reason_codes": [
+        "EVIDENCE_READY"
+      ],
+      "candidate_count": 5,
+      "evidence_hash_present": true
+    },
+    {
+      "case_id": "G-016",
+      "axis": "cross_family",
+      "question_sha256": "7395bdf4ec98462eb0b2b62678d312448ac35abfe9fcf5c3109fbb6c8d9a5167",
+      "elapsed_ms": 138,
+      "passed": true,
+      "failures": [],
+      "decision": "ANSWER",
+      "reason_codes": [
+        "EVIDENCE_READY"
+      ],
+      "candidate_count": 5,
+      "evidence_hash_present": true
+    },
+    {
+      "case_id": "G-017",
+      "axis": "cross_family",
+      "question_sha256": "9be9589eadd7ec105a1287ef504ebf2918e72c85d60a389356295f74a75ee6a7",
+      "elapsed_ms": 124,
+      "passed": true,
+      "failures": [],
+      "decision": "ANSWER",
+      "reason_codes": [
+        "EVIDENCE_READY"
+      ],
+      "candidate_count": 5,
+      "evidence_hash_present": true
+    },
+    {
+      "case_id": "G-018",
+      "axis": "relation_holds",
+      "question_sha256": "ccb7390271b8ee81161372640aa8aa5be29ae56dc611be5ca572f5a315f5ff96",
+      "elapsed_ms": 189,
+      "passed": true,
+      "failures": [],
+      "decision": "ANSWER",
+      "reason_codes": [
+        "EVIDENCE_READY"
+      ],
+      "candidate_count": 1,
+      "evidence_hash_present": true
+    },
+    {
+      "case_id": "G-019",
+      "axis": "relation_holds",
+      "question_sha256": "e8556f9912ac5e8adc3912f35d2b7fec1007e1dd6ea09634651bdc8ed099ed39",
+      "elapsed_ms": 223,
+      "passed": true,
+      "failures": [],
+      "decision": "ABSTAIN",
+      "reason_codes": [
+        "ENTITY_NOT_FOUND"
+      ],
+      "candidate_count": 0,
+      "evidence_hash_present": false
+    },
+    {
+      "case_id": "G-020",
+      "axis": "relation_affiliate",
+      "question_sha256": "0a0db76cf014f7e166b2640fe0ae3ba79835fa55e7c6f9527f0bede1498ed4e3",
+      "elapsed_ms": 213,
+      "passed": true,
+      "failures": [],
+      "decision": "ANSWER",
+      "reason_codes": [
+        "EVIDENCE_READY"
+      ],
+      "candidate_count": 5,
+      "evidence_hash_present": true
+    },
+    {
+      "case_id": "G-021",
+      "axis": "relation_subsidiary",
+      "question_sha256": "7fcb250fc2f456048dd3c98c312202117a3a49676daf3c91d6ff95b5703f2cde",
+      "elapsed_ms": 184,
+      "passed": true,
+      "failures": [],
+      "decision": "ABSTAIN",
+      "reason_codes": [
+        "EXTERNAL_EVIDENCE_MISSING"
+      ],
+      "candidate_count": 0,
+      "evidence_hash_present": false
+    },
+    {
+      "case_id": "G-022",
+      "axis": "alias_resolution",
+      "question_sha256": "67c96640a759d4932fa352d611365f99ac351d4f982eccf914f22cc1856e6048",
+      "elapsed_ms": 231,
+      "passed": true,
+      "failures": [],
+      "decision": "ANSWER",
+      "reason_codes": [
+        "EVIDENCE_READY"
+      ],
+      "candidate_count": 1,
+      "evidence_hash_present": true
+    },
+    {
+      "case_id": "G-023",
+      "axis": "alias_resolution",
+      "question_sha256": "87c5b480aa1cad6b68c69c125d5c0b2c86d40256936e21e126037e4fe334d32d",
+      "elapsed_ms": 146,
+      "passed": true,
+      "failures": [],
+      "decision": "ABSTAIN",
+      "reason_codes": [
+        "ENTITY_NOT_FOUND"
+      ],
+      "candidate_count": 0,
+      "evidence_hash_present": false
+    },
+    {
+      "case_id": "G-024",
+      "axis": "vague_ask",
+      "question_sha256": "75145494c27bc92becd864f81c3d57547da649e457dfb38eab73ac7403f38a59",
+      "elapsed_ms": 16,
+      "passed": true,
+      "failures": [],
+      "decision": "ASK",
+      "reason_codes": [
+        "AMBIGUOUS_PRODUCT_SCOPE"
+      ],
+      "candidate_count": 0,
+      "evidence_hash_present": false
+    },
+    {
+      "case_id": "G-025",
+      "axis": "vague_ask",
+      "question_sha256": "c4c9dd80af8deb7ffdd4a14392d286d3c9805d22f8115249e984515f0102ab8d",
+      "elapsed_ms": 13,
+      "passed": true,
+      "failures": [],
+      "decision": "ASK",
+      "reason_codes": [
+        "MISSING_FILTERS"
+      ],
+      "candidate_count": 0,
+      "evidence_hash_present": false
+    },
+    {
+      "case_id": "G-026",
+      "axis": "missing_period_ask",
+      "question_sha256": "c93e77b721448db40af5fef5ed0eaec9c21fb5e6dae3ddc79a19dd0b98b00bb1",
+      "elapsed_ms": 12,
+      "passed": true,
+      "failures": [],
+      "decision": "ASK",
+      "reason_codes": [
+        "MISSING_RANKING"
+      ],
+      "candidate_count": 0,
+      "evidence_hash_present": false
+    },
+    {
+      "case_id": "G-027",
+      "axis": "missing_period_ask",
+      "question_sha256": "eb58035d450399d5dadbca9ce22046607f9dac187fe5b7b8877978b7c40ac827",
+      "elapsed_ms": 12,
+      "passed": true,
+      "failures": [],
+      "decision": "ASK",
+      "reason_codes": [
+        "MISSING_FILTERS"
+      ],
+      "candidate_count": 0,
+      "evidence_hash_present": false
+    },
+    {
+      "case_id": "G-028",
+      "axis": "data_absent_abstain",
+      "question_sha256": "62f92528980d0e3dc353130c32dc420926bcf5e4656a2bcc824f451d71b19b3e",
+      "elapsed_ms": 39,
+      "passed": true,
+      "failures": [],
+      "decision": "ABSTAIN",
+      "reason_codes": [
+        "NO_VALID_CANDIDATE"
+      ],
+      "candidate_count": 0,
+      "evidence_hash_present": false
+    },
+    {
+      "case_id": "G-029",
+      "axis": "data_absent_abstain",
+      "question_sha256": "6cb271f4a4b4db7e81be392a18e504d4e92cf5f4b3f7aeeca42b4b34d9f701b5",
+      "elapsed_ms": 59,
+      "passed": false,
+      "failures": [
+        "reason_codes_missing:NO_VALID_CANDIDATE"
+      ],
+      "decision": "ABSTAIN",
+      "reason_codes": [
+        "QUALITY_BLOCKED"
+      ],
+      "candidate_count": 0,
+      "evidence_hash_present": false
+    },
+    {
+      "case_id": "G-030",
+      "axis": "nonexistent_value",
+      "question_sha256": "a46f66d29dcf50733db0f0ca130f64cae8f573cb84afb2b81a06d8e19c6f95ee",
+      "elapsed_ms": 47,
+      "passed": true,
+      "failures": [],
+      "decision": "ABSTAIN",
+      "reason_codes": [
+        "NO_VALID_CANDIDATE"
+      ],
+      "candidate_count": 0,
+      "evidence_hash_present": false
+    },
+    {
+      "case_id": "G-031",
+      "axis": "nonexistent_value",
+      "question_sha256": "4f314c165e9d9709030799c966bee55d3a987f32ac9c8f2412d2a083bae6709f",
+      "elapsed_ms": 18,
+      "passed": true,
+      "failures": [],
+      "decision": "ABSTAIN",
+      "reason_codes": [
+        "FIELD_NOT_AVAILABLE"
+      ],
+      "candidate_count": 0,
+      "evidence_hash_present": false
+    },
+    {
+      "case_id": "G-032",
+      "axis": "future_prediction",
+      "question_sha256": "24b58e5863a1f9c9a7617a08e441eb55d7dce4edd87f81edd4356f2d5b1bf4dd",
+      "elapsed_ms": 15,
+      "passed": true,
+      "failures": [],
+      "decision": "ABSTAIN",
+      "reason_codes": [
+        "UNSUPPORTED_PREDICTION"
+      ],
+      "candidate_count": 0,
+      "evidence_hash_present": false
+    },
+    {
+      "case_id": "G-033",
+      "axis": "future_prediction",
+      "question_sha256": "730336dfe3d19699d6e2e103f9a2657d4a8a7c2166ce55d648798029550f6bee",
+      "elapsed_ms": 14,
+      "passed": true,
+      "failures": [],
+      "decision": "ABSTAIN",
+      "reason_codes": [
+        "UNSUPPORTED_PREDICTION"
+      ],
+      "candidate_count": 0,
+      "evidence_hash_present": false
+    },
+    {
+      "case_id": "G-034",
+      "axis": "zero_candidates",
+      "question_sha256": "5f8a8df605c2cfaf539702fbd06ad580ef89fa47c82c9c3349a37c44f35ec0f3",
+      "elapsed_ms": 14,
+      "passed": true,
+      "failures": [],
+      "decision": "ABSTAIN",
+      "reason_codes": [
+        "FIELD_NOT_AVAILABLE"
+      ],
+      "candidate_count": 0,
+      "evidence_hash_present": false
+    },
+    {
+      "case_id": "G-035",
+      "axis": "zero_candidates",
+      "question_sha256": "e93133f562a6c16b7fb85f9f654bd4f233ec271c240ea8b29f0f83005eade211",
+      "elapsed_ms": 12,
+      "passed": true,
+      "failures": [],
+      "decision": "ABSTAIN",
+      "reason_codes": [
+        "VALIDATION_FAILED"
+      ],
+      "candidate_count": 0,
+      "evidence_hash_present": false
+    },
+    {
+      "case_id": "G-036",
+      "axis": "missing_zero_sentinel",
+      "question_sha256": "745b09cf83f9d4b0a8b65ca7415572126d28744d4f40144c8bdf11f12c073780",
+      "elapsed_ms": 583,
+      "passed": false,
+      "failures": [
+        "decision:ANSWER!=ABSTAIN",
+        "reason_codes_missing:QUALITY_BLOCKED"
+      ],
+      "decision": "ANSWER",
+      "reason_codes": [
+        "EVIDENCE_READY"
+      ],
+      "candidate_count": 5,
+      "evidence_hash_present": true
+    },
+    {
+      "case_id": "G-037",
+      "axis": "missing_zero_sentinel",
+      "question_sha256": "ed77071e240dbb116c1472cb573311d8a5fc0588f579e5a4e468d0a7ad20d394",
+      "elapsed_ms": 386,
+      "passed": true,
+      "failures": [],
+      "decision": "ANSWER",
+      "reason_codes": [
+        "EVIDENCE_READY"
+      ],
+      "candidate_count": 5,
+      "evidence_hash_present": true
+    },
+    {
+      "case_id": "G-038",
+      "axis": "missing_zero_sentinel",
+      "question_sha256": "772f78c047684d71ccd02762e7c939d725d03d64bd70b9756a22488bd691fa86",
+      "elapsed_ms": 99,
+      "passed": true,
+      "failures": [],
+      "decision": "ABSTAIN",
+      "reason_codes": [
+        "QUALITY_BLOCKED"
+      ],
+      "candidate_count": 0,
+      "evidence_hash_present": false
+    },
+    {
+      "case_id": "G-039",
+      "axis": "asof_mismatch",
+      "question_sha256": "2f7328a5d88027b81c7b14b9cdb39487fdbf9d0de95a73dfec086806ff137b88",
+      "elapsed_ms": 550,
+      "passed": true,
+      "failures": [],
+      "decision": "ANSWER",
+      "reason_codes": [
+        "EVIDENCE_READY"
+      ],
+      "candidate_count": 5,
+      "evidence_hash_present": true
+    },
+    {
+      "case_id": "G-040",
+      "axis": "asof_mismatch",
+      "question_sha256": "58b2c0ce1927bfc68e575c86a2c8aaea5701b946e8b35a374680d8a488b1acd9",
+      "elapsed_ms": 140,
+      "passed": true,
+      "failures": [],
+      "decision": "ANSWER",
+      "reason_codes": [
+        "EVIDENCE_READY"
+      ],
+      "candidate_count": 5,
+      "evidence_hash_present": true
+    },
+    {
+      "case_id": "G-041",
+      "axis": "partial_coverage",
+      "question_sha256": "09902f5bbec33c75da0d6bc4a8ea9468fa705d5e670d5a817282d09941177dd7",
+      "elapsed_ms": 66,
+      "passed": true,
+      "failures": [],
+      "decision": "ANSWER",
+      "reason_codes": [
+        "EVIDENCE_READY"
+      ],
+      "candidate_count": 5,
+      "evidence_hash_present": true
+    },
+    {
+      "case_id": "G-042",
+      "axis": "partial_coverage",
+      "question_sha256": "51fc7555e13f828692d95a8de443496af383991bf6b1b1ab95ad13b100f54daf",
+      "elapsed_ms": 1113,
+      "passed": true,
+      "failures": [],
+      "decision": "ANSWER",
+      "reason_codes": [
+        "EVIDENCE_READY"
+      ],
+      "candidate_count": 5,
+      "evidence_hash_present": true
+    },
+    {
+      "case_id": "G-043",
+      "axis": "partial_coverage",
+      "question_sha256": "00bc1271df95c8db1de89774743f0c5d003d850eec2b597a88e7ed4d7c5ac705",
+      "elapsed_ms": 111,
+      "passed": false,
+      "failures": [
+        "decision:ANSWER!=ABSTAIN",
+        "reason_codes_missing:NO_VALID_CANDIDATE"
+      ],
+      "decision": "ANSWER",
+      "reason_codes": [
+        "EVIDENCE_READY"
+      ],
+      "candidate_count": 5,
+      "evidence_hash_present": true
+    },
+    {
+      "case_id": "G-044",
+      "axis": "public_private_guard",
+      "question_sha256": "e39223699a51552e30c876fc3203830aa7aa4e4b47253c217b58cba3187995d0",
+      "elapsed_ms": 744,
+      "passed": true,
+      "failures": [],
+      "decision": "ANSWER",
+      "reason_codes": [
+        "EVIDENCE_READY"
+      ],
+      "candidate_count": 5,
+      "evidence_hash_present": true
+    },
+    {
+      "case_id": "G-045",
+      "axis": "public_private_guard",
+      "question_sha256": "ba766fd877bf66251e8f66dd74744cc64fc84c39bd84fca259e7187efb2c040e",
+      "elapsed_ms": 55,
+      "passed": true,
+      "failures": [],
+      "decision": "ABSTAIN",
+      "reason_codes": [
+        "NO_VALID_CANDIDATE"
+      ],
+      "candidate_count": 0,
+      "evidence_hash_present": false
+    },
+    {
+      "case_id": "G-046",
+      "axis": "buyable_guard",
+      "question_sha256": "ef284740c89e7cc5640a3cde31e55e22e765a0c96497d93af76c0fb03c5db60b",
+      "elapsed_ms": 78,
+      "passed": true,
+      "failures": [],
+      "decision": "ANSWER",
+      "reason_codes": [
+        "EVIDENCE_READY"
+      ],
+      "candidate_count": 4,
+      "evidence_hash_present": true
+    },
+    {
+      "case_id": "G-047",
+      "axis": "buyable_guard",
+      "question_sha256": "c3e897d243209801f50025571372120474f1a5e7fbdb8f3c5f9ee5f7eaa16d30",
+      "elapsed_ms": 11,
+      "passed": true,
+      "failures": [],
+      "decision": "ABSTAIN",
+      "reason_codes": [
+        "FIELD_NOT_AVAILABLE"
+      ],
+      "candidate_count": 0,
+      "evidence_hash_present": false
+    },
+    {
+      "case_id": "G-048",
+      "axis": "answer_guard",
+      "question_sha256": "fa483fecb263c5aae7079dd220ab3bb4651c52e18860432c4a8d870e5ef96cd9",
+      "elapsed_ms": 743,
+      "passed": true,
+      "failures": [],
+      "decision": "ANSWER",
+      "reason_codes": [
+        "EVIDENCE_READY"
+      ],
+      "candidate_count": 5,
+      "evidence_hash_present": true
+    },
+    {
+      "case_id": "G-049",
+      "axis": "answer_guard",
+      "question_sha256": "7e0fa19a7e2c0cfaccd7f718517206055a6bc127bdc1b575387f0d65d58935b0",
+      "elapsed_ms": 11,
+      "passed": true,
+      "failures": [],
+      "decision": "ASK",
+      "reason_codes": [
+        "MISSING_FILTERS"
+      ],
+      "candidate_count": 0,
+      "evidence_hash_present": false
+    },
+    {
+      "case_id": "G-050",
+      "axis": "ambiguous_entity",
+      "question_sha256": "4d4e29624aa19c9c7808a79dbe8f3b3ba344768019a90b2f3804cd8ed96303ec",
+      "elapsed_ms": 27,
+      "passed": true,
+      "failures": [],
+      "decision": "ASK",
+      "reason_codes": [
+        "AMBIGUOUS_ENTITY"
+      ],
+      "candidate_count": 0,
+      "evidence_hash_present": false
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+snapshot_version: 2026-07-11-external-baseline
+validation_date: 2026-09-02
+normalized_dir: normalized
+files:
+  - name: source_documents.jsonl
+    sha256: placeholder
+  - name: entities.jsonl
+    sha256: placeholder
+  - name: aliases.jsonl
+    sha256: placeholder
+  - name: holdings.jsonl
+    sha256: placeholder
+  - name: relations.jsonl
+    sha256: placeholder
+  - name: document_chunks.jsonl
+    sha256: placeholder

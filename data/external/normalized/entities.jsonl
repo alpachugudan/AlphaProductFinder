@@ -1,0 +1,3 @@
+{"entity_id": "ENT:KR:005930", "entity_type": "COMPANY", "canonical_name": "Samsung Electronics Co., Ltd.", "country": "KR", "identifiers_json": {"ticker": "005930", "exchange": "KRX"}}
+{"entity_id": "ENT:KR:000660", "entity_type": "COMPANY", "canonical_name": "SK hynix Inc.", "country": "KR", "identifiers_json": {"ticker": "000660", "exchange": "KRX"}}
+{"entity_id": "ENT:KR:SEC:SAMSUNG_ELEC", "entity_type": "COMPANY", "canonical_name": "Samsung Electronics", "country": "KR", "identifiers_json": {"alias_group": "samsung"}}

@@ -1,0 +1,18 @@
+{
+  "version": "1.0",
+  "intent": "FILTER_AND_RANK",
+  "product_families": ["FUND_PUBLIC"],
+  "entities": [],
+  "filters": [
+    {"field": "return_1y", "operator": "NOT_NULL"}
+  ],
+  "relationship_filters": [],
+  "metrics": ["return_1y", "aum"],
+  "preferences": [
+    {"field": "return_1y", "direction": "DESC", "priority": 1}
+  ],
+  "sort": [],
+  "limit": 5,
+  "as_of_requirement": "SHOW_FIELD_DATE",
+  "missing_policy": "EXCLUDE_AND_DISCLOSE"
+}

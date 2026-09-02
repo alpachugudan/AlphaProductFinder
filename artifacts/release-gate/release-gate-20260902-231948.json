@@ -1,0 +1,13 @@
+{
+  "schema_version": "release-gate-1.0",
+  "passed": true,
+  "failures": [],
+  "golden_report": "golden-20260902-231256.json",
+  "benchmark_report": "benchmark-20260902-231711.json",
+  "checks": [
+    "Golden case count is exactly 50",
+    "Golden mock report has no failures or known gaps",
+    "Benchmark warm p50 <= 8000ms and p95 <= 20000ms",
+    "No CLOVA Studio request is made by this gate"
+  ]
+}

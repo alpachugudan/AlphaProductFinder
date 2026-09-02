@@ -1,0 +1,24 @@
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix pf: <http://miraeasset.product-finder/ontology/common#> .
+@prefix fund: <http://miraeasset.product-finder/ontology/fund_public#> .
+
+fund:PublicFund a owl:Class ;
+  rdfs:subClassOf pf:Fund ;
+  rdfs:label "Public Fund"@en, "공모펀드"@ko .
+
+fund:return1m a pf:Metric ;
+  rdfs:label "1m return"@en, "1개월 수익률"@ko ;
+  rdfs:comment "maps to fd_mm1_ern_r"@en .
+
+fund:return1y a pf:Metric ;
+  rdfs:label "1y return"@en, "1년 수익률"@ko ;
+  rdfs:comment "maps to fd_yr1_ern_r"@en .
+
+fund:netAsset a pf:Metric ;
+  rdfs:label "net asset"@en, "순자산"@ko ;
+  rdfs:comment "maps to fd_nast_suma"@en .
+
+fund:weeklyReturnUnavailable a pf:Metric ;
+  rdfs:label "1w return unavailable"@en ;
+  rdfs:comment "fd_wk1_ern_r is FEATURE_NOT_AVAILABLE_FOR_MARKET"@en .

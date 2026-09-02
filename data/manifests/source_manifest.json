@@ -1,0 +1,60 @@
+{
+  "dataset_version": "2026-07-11-baseline",
+  "validation_date": "2026-09-01",
+  "source_data_dir_hint": "../데이터셋",
+  "datasets": [
+    {
+      "logical_table": "PRBD01N001",
+      "raw_table": "raw_bond_kr",
+      "schema_file": "prbd01n001_schema.xlsx",
+      "data_file": "prbd01n001_data.xlsx",
+      "schema_sha256": "9965126695066f9dc07951a78054e9e7639b6863d1ad2a9616f7e2d8fcadbc4f",
+      "data_sha256": "574ae5d6c1d98704712c256ed5352cbaed065ea9c3a6eb7b2a52adb305fa9001",
+      "schema_sheet": "schema",
+      "data_sheet": "data",
+      "expected_rows": 21882,
+      "expected_columns": 58,
+      "source_key_fields": ["pd_no", "pd_exg_mkt", "info_base_dt", "info_seq"]
+    },
+    {
+      "logical_table": "PREF01N001",
+      "raw_table": "raw_etf_kr",
+      "schema_file": "pref01n001_schema.xlsx",
+      "data_file": "pref01n001_data.xlsx",
+      "schema_sha256": "2135081fd8107760d127915147032987ee1d9e7c2ed039665ae4214b96faec5a",
+      "data_sha256": "18c4329d8fc8768d030316816f3e6e48226a3c217db3354245b766a2c6f6c592",
+      "schema_sheet": "schema",
+      "data_sheet": "data",
+      "expected_rows": 1780,
+      "expected_columns": 98,
+      "source_key_fields": ["pd_itm_no"]
+    },
+    {
+      "logical_table": "PREF02N001",
+      "raw_table": "raw_etf_global",
+      "schema_file": "pref02n001_schema.xlsx",
+      "data_file": "pref02n001_data.xlsx",
+      "schema_sha256": "32ac732f0501f4ab518682175fecc50756ee1eafde9296801f139d62559b5e64",
+      "data_sha256": "ca6a274aeaf3f884f2f7635d7802558bc6dabf408871ecb1f71e5a50d9d34067",
+      "schema_sheet": "schema",
+      "data_sheet": "data",
+      "expected_rows": 6037,
+      "expected_columns": 49,
+      "source_key_fields": ["pd_itm_no"]
+    },
+    {
+      "logical_table": "PRFD01N001",
+      "raw_table": "raw_fund",
+      "schema_file": "prfd01n001_schema.xlsx",
+      "data_file": "prfd01n001_data.xlsx",
+      "schema_sha256": "cfe7be44cbcd9ce349206776a4eb46996162643acbf3ca5a4f74c2886394862b",
+      "data_sha256": "81b3ce3f1d5042b32fd52a76acff094fc5b8dd9fa36289af2fb54c195eb5d94c",
+      "schema_sheet": "schema",
+      "data_sheet": "data",
+      "expected_rows": 23676,
+      "expected_columns": 75,
+      "source_key_fields": ["itm_no"]
+    }
+  ],
+  "expected_total_rows": 53375
+}

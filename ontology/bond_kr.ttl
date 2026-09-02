@@ -1,0 +1,20 @@
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix pf: <http://miraeasset.product-finder/ontology/common#> .
+@prefix bond: <http://miraeasset.product-finder/ontology/bond_kr#> .
+
+bond:KoreanBond a owl:Class ;
+  rdfs:subClassOf pf:Bond ;
+  rdfs:label "Korean Bond"@en, "국내채권"@ko .
+
+bond:appliedYield a pf:Metric ;
+  rdfs:label "applied yield"@en, "적용수익률"@ko ;
+  rdfs:comment "maps to curated.applied_yield / source applied_yield"@en .
+
+bond:remainingDays a pf:Metric ;
+  rdfs:label "remaining days"@en, "잔존일수"@ko ;
+  rdfs:comment "maps to curated.remaining_days"@en .
+
+bond:creditGrade a pf:Metric ;
+  rdfs:label "credit grade"@en, "신용등급"@ko ;
+  rdfs:comment "maps to source crd_grd"@en .

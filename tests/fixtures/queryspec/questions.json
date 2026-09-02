@@ -1,0 +1,6 @@
+{
+  "미국 투자 국내 ETF 보수 낮은 순": "etf_kr_expense_rank.json",
+  "잔존일수 365일 이하 채권": "bond_remaining_days.json",
+  "해외 ETF 순자산 1000억 이상": "etf_global_aum.json",
+  "1년 수익률 높은 공모펀드": "fund_return_1y_rank.json"
+}

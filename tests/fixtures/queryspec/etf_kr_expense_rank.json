@@ -1,0 +1,18 @@
+{
+  "version": "1.0",
+  "intent": "FILTER_AND_RANK",
+  "product_families": ["ETF_KR"],
+  "entities": [],
+  "filters": [
+    {"field": "investment_region", "operator": "CONTAINS", "value": "미국"}
+  ],
+  "relationship_filters": [],
+  "metrics": ["expense_ratio", "aum"],
+  "preferences": [
+    {"field": "expense_ratio", "direction": "ASC", "priority": 1}
+  ],
+  "sort": [],
+  "limit": 5,
+  "as_of_requirement": "SHOW_FIELD_DATE",
+  "missing_policy": "EXCLUDE_AND_DISCLOSE"
+}

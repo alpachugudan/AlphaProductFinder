@@ -1,0 +1,2 @@
+{"chunk_id": "chunk-kodex-1", "document_id": "doc-kodex-semiconductor-202606", "entity_ids": ["ENT:KR:005930", "ENT:KR:000660"], "chunk_text": "KODEX 반도체 ETF는 삼성전자와 SK하이닉스를 주요 구성종목으로 보유한다", "token_count": 24}
+{"chunk_id": "chunk-samsung-ir-1", "document_id": "doc-samsung-ir-subsidiary-202606", "entity_ids": ["ENT:KR:005930"], "chunk_text": "삼성전자는 SK하이닉스와 계열 관계에 해당하지 않으며 투자 관계만 공시한다", "token_count": 22}

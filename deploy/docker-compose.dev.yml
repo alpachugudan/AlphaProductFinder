@@ -1,0 +1,20 @@
+services:
+  postgres:
+    image: pgvector/pgvector:pg16
+    container_name: product-finder-postgres-dev
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: product_finder
+    ports:
+      - "127.0.0.1:5432:5432"
+    volumes:
+      - product_finder_pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d product_finder"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+volumes:
+  product_finder_pgdata:

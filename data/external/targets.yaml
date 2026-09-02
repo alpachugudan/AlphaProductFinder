@@ -1,0 +1,18 @@
+p0_targets:
+  - id: etf_kr_kodex_semiconductor
+    product_uid_prefix: ETF_KR
+    description: 국내 반도체 ETF 구성종목 질의
+    coverage_status: ACTIVE
+  - id: etf_global_sp500
+    product_uid_prefix: ETF_GLOBAL
+    description: 해외 S&P500 ETF 구성종목 질의
+    coverage_status: ACTIVE
+  - id: company_samsung_electronics
+    entity_id: ENT:KR:005930
+    description: 삼성전자 계열 관계 질의
+    coverage_status: ACTIVE
+  - id: fund_public_global_equity
+    product_uid_prefix: FUND_PUBLIC
+    description: 공모펀드 공식 구성종목
+    coverage_status: NOT_AVAILABLE_FROM_OFFICIAL_SOURCE
+    reason: 공식 구성종목 파일 미공개

@@ -1,0 +1,1138 @@
+# Golden dataset — Step 11 하드닝
+# 각 case는 결정적 QuerySpec(oracle)과 평가 기대값을 담는다.
+# Mock 모드는 query_spec을 직접 주입해 검색·판정·근거·답변 파이프라인을 검증하고,
+# HyperCLOVA 모드는 동일 rubric으로 실제 intent 파싱·답변을 검증한다.
+
+meta:
+  dataset_version: 2026-07-11-baseline
+  external_version: 2026-07-11-external-baseline
+  schema_version: queryspec-1.0
+  prompt_version_mock: mock-v1
+  prompt_version_hyperclova: hcx-v1
+
+cases:
+  # --- 1. 단일 상품 이름/코드 조회 ---
+  - id: G-001
+    axis: single_product_lookup
+    question: "iShares가 들어간 해외 ETF를 찾아줘"
+    query_spec:
+      version: "1.0"
+      intent: LOOKUP_PRODUCT
+      product_families: [ETF_GLOBAL]
+      entities: []
+      filters: [{field: product_name, operator: CONTAINS, value: "iShares"}]
+      relationship_filters: []
+      metrics: []
+      preferences: []
+      sort: []
+      limit: 5
+      as_of_requirement: SHOW_FIELD_DATE
+      missing_policy: EXCLUDE_AND_DISCLOSE
+    expect:
+      intent: LOOKUP_PRODUCT
+      families: [ETF_GLOBAL]
+      decision: ANSWER
+      min_candidates: 1
+
+  - id: G-002
+    axis: single_product_lookup
+    question: "KODEX가 들어간 국내 ETF를 찾아줘"
+    query_spec:
+      version: "1.0"
+      intent: LOOKUP_PRODUCT
+      product_families: [ETF_KR]
+      entities: []
+      filters: [{field: product_name, operator: CONTAINS, value: "KODEX"}]
+      relationship_filters: []
+      metrics: []
+      preferences: []
+      sort: []
+      limit: 5
+      as_of_requirement: SHOW_FIELD_DATE
+      missing_policy: EXCLUDE_AND_DISCLOSE
+    expect:
+      intent: LOOKUP_PRODUCT
+      families: [ETF_KR]
+      decision: ANSWER
+      min_candidates: 1
+
+  - id: G-003
+    axis: single_product_lookup
+    question: "국고채가 들어간 채권을 찾아줘"
+    query_spec:
+      version: "1.0"
+      intent: LOOKUP_PRODUCT
+      product_families: [BOND_KR]
+      entities: []
+      filters: [{field: product_name, operator: CONTAINS, value: "국고채"}]
+      relationship_filters: []
+      metrics: []
+      preferences: []
+      sort: []
+      limit: 5
+      as_of_requirement: SHOW_FIELD_DATE
+      missing_policy: EXCLUDE_AND_DISCLOSE
+    expect:
+      intent: LOOKUP_PRODUCT
+      families: [BOND_KR]
+      decision: ANSWER
+      min_candidates: 1
+
+  # --- 2. 단일/복수 hard filter ---
+  - id: G-004
+    axis: hard_filter
+    question: "잔존일수 365일 이하 채권"
+    query_spec:
+      version: "1.0"
+      intent: FILTER
+      product_families: [BOND_KR]
+      entities: []
+      filters: [{field: remaining_days, operator: LTE, value: 365}]
+      relationship_filters: []
+      metrics: [remaining_days, applied_yield]
+      preferences: []
+      sort: []
+      limit: 5
+      as_of_requirement: SHOW_FIELD_DATE
+      missing_policy: EXCLUDE_AND_DISCLOSE
+    expect:
+      intent: FILTER
+      families: [BOND_KR]
+      decision: ANSWER
+      min_candidates: 1
+
+  - id: G-005
+    axis: hard_filter
+    question: "해외 ETF 중 순자산 1000억 이상"
+    query_spec:
+      version: "1.0"
+      intent: FILTER
+      product_families: [ETF_GLOBAL]
+      entities: []
+      filters: [{field: aum, operator: GTE, value: 100000000000}]
+      relationship_filters: []
+      metrics: [aum, return_1d]
+      preferences: []
+      sort: []
+      limit: 5
+      as_of_requirement: SHOW_FIELD_DATE
+      missing_policy: EXCLUDE_AND_DISCLOSE
+    expect:
+      intent: FILTER
+      families: [ETF_GLOBAL]
+      decision: ANSWER
+      min_candidates: 1
+
+  - id: G-006
+    axis: hard_filter
+    question: "미국 투자 국내 ETF (정렬 없음)"
+    query_spec:
+      version: "1.0"
+      intent: FILTER
+      product_families: [ETF_KR]
+      entities: []
+      filters: [{field: investment_region, operator: CONTAINS, value: "미국"}]
+      relationship_filters: []
+      metrics: [aum]
+      preferences: []
+      sort: []
+      limit: 5
+      as_of_requirement: SHOW_FIELD_DATE
+      missing_policy: EXCLUDE_AND_DISCLOSE
+    expect:
+      intent: FILTER
+      families: [ETF_KR]
+      decision: ANSWER
+      min_candidates: 1
+
+  - id: G-007
+    axis: hard_filter
+    question: "잔존일수 30~365일 채권"
+    query_spec:
+      version: "1.0"
+      intent: FILTER
+      product_families: [BOND_KR]
+      entities: []
+      filters: [{field: remaining_days, operator: BETWEEN, value: [30, 365]}]
+      relationship_filters: []
+      metrics: [remaining_days, applied_yield]
+      preferences: []
+      sort: []
+      limit: 5
+      as_of_requirement: SHOW_FIELD_DATE
+      missing_policy: EXCLUDE_AND_DISCLOSE
+    expect:
+      intent: FILTER
+      families: [BOND_KR]
+      decision: ANSWER
+      min_candidates: 1
+
+  # --- 3. ASC/DESC TOP N과 동점 ---
+  - id: G-008
+    axis: sort_topn
+    question: "1년 수익률 높은 공모펀드 TOP 5"
+    query_spec:
+      version: "1.0"
+      intent: FILTER_AND_RANK
+      product_families: [FUND_PUBLIC]
+      entities: []
+      filters: [{field: return_1y, operator: NOT_NULL}]
+      relationship_filters: []
+      metrics: [return_1y, aum]
+      preferences: [{field: return_1y, direction: DESC, priority: 1}]
+      sort: []
+      limit: 5
+      as_of_requirement: SHOW_FIELD_DATE
+      missing_policy: EXCLUDE_AND_DISCLOSE
+    expect:
+      intent: FILTER_AND_RANK
+      families: [FUND_PUBLIC]
+      decision: ANSWER
+      min_candidates: 1
+
+  - id: G-009
+    axis: sort_topn
+    question: "잔존일수 짧은 채권 순"
+    query_spec:
+      version: "1.0"
+      intent: FILTER_AND_RANK
+      product_families: [BOND_KR]
+      entities: []
+      filters: [{field: remaining_days, operator: NOT_NULL}]
+      relationship_filters: []
+      metrics: [remaining_days, applied_yield]
+      preferences: [{field: remaining_days, direction: ASC, priority: 1}]
+      sort: []
+      limit: 5
+      as_of_requirement: SHOW_FIELD_DATE
+      missing_policy: EXCLUDE_AND_DISCLOSE
+    expect:
+      intent: FILTER_AND_RANK
+      families: [BOND_KR]
+      decision: ANSWER
+      min_candidates: 1
+
+  - id: G-010
+    axis: sort_topn
+    question: "국내 ETF 순자산 큰 순"
+    query_spec:
+      version: "1.0"
+      intent: FILTER_AND_RANK
+      product_families: [ETF_KR]
+      entities: []
+      filters: [{field: aum, operator: NOT_NULL}]
+      relationship_filters: []
+      metrics: [aum]
+      preferences: [{field: aum, direction: DESC, priority: 1}]
+      sort: []
+      limit: 5
+      as_of_requirement: SHOW_FIELD_DATE
+      missing_policy: EXCLUDE_AND_DISCLOSE
+    expect:
+      intent: FILTER_AND_RANK
+      families: [ETF_KR]
+      decision: ANSWER
+      min_candidates: 1
+
+  # --- 4. 두 상품 비교 ---
+  - id: G-011
+    axis: compare_products
+    question: "삼성과 미래에셋 운용사 ETF 순자산 비교"
+    query_spec:
+      version: "1.0"
+      intent: COMPARE_PRODUCTS
+      product_families: [ETF_KR]
+      entities: []
+      filters: [{field: manager_or_issuer, operator: IN, value: ["삼성", "미래에셋"]}]
+      relationship_filters: []
+      metrics: [aum]
+      preferences: []
+      sort: []
+      limit: 5
+      as_of_requirement: SHOW_FIELD_DATE
+      missing_policy: EXCLUDE_AND_DISCLOSE
+    expect:
+      intent: COMPARE_PRODUCTS
+      families: [ETF_KR]
+      decision: ANSWER
+      min_candidates: 1
+
+  - id: G-012
+    axis: compare_products
+    question: "한국과 인도 지역 해외 ETF 비교"
+    query_spec:
+      version: "1.0"
+      intent: COMPARE_PRODUCTS
+      product_families: [ETF_GLOBAL]
+      entities: []
+      filters: [{field: investment_region, operator: IN, value: ["Korea", "India"]}]
+      relationship_filters: []
+      metrics: [aum, return_1d]
+      preferences: []
+      sort: []
+      limit: 5
+      as_of_requirement: SHOW_FIELD_DATE
+      missing_policy: EXCLUDE_AND_DISCLOSE
+    expect:
+      intent: COMPARE_PRODUCTS
+      families: [ETF_GLOBAL]
+      decision: ANSWER
+      min_candidates: 1
+
+  # --- 5. 복수 priority와 무가중 Pareto ---
+  - id: G-013
+    axis: multi_preference
+    question: "보수 낮고 순자산 큰 국내 ETF (우선순위)"
+    query_spec:
+      version: "1.0"
+      intent: FILTER_AND_RANK
+      product_families: [ETF_KR]
+      entities: []
+      filters: [{field: aum, operator: NOT_NULL}]
+      relationship_filters: []
+      metrics: [expense_ratio, aum]
+      preferences:
+        - {field: expense_ratio, direction: ASC, priority: 1}
+        - {field: aum, direction: DESC, priority: 2}
+      sort: []
+      limit: 5
+      as_of_requirement: SHOW_FIELD_DATE
+      missing_policy: EXCLUDE_AND_DISCLOSE
+    expect:
+      intent: FILTER_AND_RANK
+      families: [ETF_KR]
+      decision: ANSWER
+      min_candidates: 1
+
+  - id: G-014
+    axis: multi_preference
+    question: "수익률 높고 보수 낮은 국내 ETF (Pareto)"
+    query_spec:
+      version: "1.0"
+      intent: FILTER_AND_RANK
+      product_families: [ETF_KR]
+      entities: []
+      filters: [{field: aum, operator: NOT_NULL}]
+      relationship_filters: []
+      metrics: [return_1d, expense_ratio]
+      preferences:
+        - {field: return_1d, direction: DESC}
+        - {field: expense_ratio, direction: ASC}
+      sort: []
+      limit: 5
+      as_of_requirement: SHOW_FIELD_DATE
+      missing_policy: EXCLUDE_AND_DISCLOSE
+    expect:
+      intent: FILTER_AND_RANK
+      families: [ETF_KR]
+      decision: ANSWER
+      min_candidates: 1
+
+  - id: G-015
+    axis: multi_preference
+    question: "순자산 크고 1년 수익률 높은 공모펀드 (우선순위)"
+    query_spec:
+      version: "1.0"
+      intent: FILTER_AND_RANK
+      product_families: [FUND_PUBLIC]
+      entities: []
+      filters: [{field: return_1y, operator: NOT_NULL}]
+      relationship_filters: []
+      metrics: [aum, return_1y]
+      preferences:
+        - {field: aum, direction: DESC, priority: 1}
+        - {field: return_1y, direction: DESC, priority: 2}
+      sort: []
+      limit: 5
+      as_of_requirement: SHOW_FIELD_DATE
+      missing_policy: EXCLUDE_AND_DISCLOSE
+    expect:
+      intent: FILTER_AND_RANK
+      families: [FUND_PUBLIC]
+      decision: ANSWER
+      min_candidates: 1
+
+  # --- 6. 상품군 교차 ---
+  - id: G-016
+    axis: cross_family
+    question: "채권과 국내 ETF에서 삼성이름 상품 교차 검색"
+    query_spec:
+      version: "1.0"
+      intent: CROSS_FAMILY_SEARCH
+      product_families: [BOND_KR, ETF_KR]
+      entities: []
+      filters: [{field: product_name, operator: CONTAINS, value: "삼성"}]
+      relationship_filters: []
+      metrics: []
+      preferences: []
+      sort: []
+      limit: 5
+      as_of_requirement: SHOW_FIELD_DATE
+      missing_policy: EXCLUDE_AND_DISCLOSE
+    expect:
+      intent: CROSS_FAMILY_SEARCH
+      families: [BOND_KR, ETF_KR]
+      decision: ANSWER
+      min_candidates: 1
+
+  - id: G-017
+    axis: cross_family
+    question: "국내·해외 ETF 교차 검색 (미국)"
+    query_spec:
+      version: "1.0"
+      intent: CROSS_FAMILY_SEARCH
+      product_families: [ETF_KR, ETF_GLOBAL]
+      entities: []
+      filters: [{field: investment_region, operator: CONTAINS, value: "미국"}]
+      relationship_filters: []
+      metrics: []
+      preferences: []
+      sort: []
+      limit: 5
+      as_of_requirement: SHOW_FIELD_DATE
+      missing_policy: EXCLUDE_AND_DISCLOSE
+    expect:
+      intent: CROSS_FAMILY_SEARCH
+      families: [ETF_KR, ETF_GLOBAL]
+      decision: ANSWER
+      min_candidates: 1
+
+  # --- 7. ETF 구성종목 (HOLDS) ---
+  - id: G-018
+    axis: relation_holds
+    question: "삼성전자를 담은 ETF"
+    query_spec:
+      version: "1.0"
+      intent: RELATION_SEARCH
+      product_families: [ETF_KR]
+      entities: []
+      filters: []
+      relationship_filters: [{relation: HOLDS, target_entity: "삼성전자"}]
+      metrics: []
+      preferences: []
+      sort: []
+      limit: 5
+      as_of_requirement: SHOW_FIELD_DATE
+      missing_policy: EXCLUDE_AND_DISCLOSE
+    expect:
+      intent: RELATION_SEARCH
+      families: [ETF_KR]
+      decision: ANSWER
+      min_candidates: 1
+
+  - id: G-019
+    axis: relation_holds
+    question: "존재하지 않는 기업을 담은 ETF"
+    query_spec:
+      version: "1.0"
+      intent: RELATION_SEARCH
+      product_families: [ETF_KR]
+      entities: []
+      filters: []
+      relationship_filters: [{relation: HOLDS, target_entity: "존재하지않는기업"}]
+      metrics: []
+      preferences: []
+      sort: []
+      limit: 5
+      as_of_requirement: SHOW_FIELD_DATE
+      missing_policy: EXCLUDE_AND_DISCLOSE
+    expect:
+      intent: RELATION_SEARCH
+      families: [ETF_KR]
+      decision: ABSTAIN
+      reason_codes: [ENTITY_NOT_FOUND]
+
+  # --- 8. 기업 자회사/계열 관계 ---
+  - id: G-020
+    axis: relation_affiliate
+    question: "삼성전자와 계열 관계인 기업"
+    query_spec:
+      version: "1.0"
+      intent: RELATION_SEARCH
+      product_families: [ETF_KR]
+      entities: []
+      filters: []
+      relationship_filters: [{relation: AFFILIATE_OF, target_entity: "삼성전자"}]
+      metrics: []
+      preferences: []
+      sort: []
+      limit: 5
+      as_of_requirement: SHOW_FIELD_DATE
+      missing_policy: EXCLUDE_AND_DISCLOSE
+    expect:
+      intent: RELATION_SEARCH
+      families: [ETF_KR]
+      decision: ANSWER
+
+  - id: G-021
+    axis: relation_subsidiary
+    question: "삼성전자 자회사 관계 조회"
+    query_spec:
+      version: "1.0"
+      intent: RELATION_SEARCH
+      product_families: [ETF_KR]
+      entities: []
+      filters: []
+      relationship_filters: [{relation: SUBSIDIARY_OF, target_entity: "삼성전자"}]
+      metrics: []
+      preferences: []
+      sort: []
+      limit: 5
+      as_of_requirement: SHOW_FIELD_DATE
+      missing_policy: EXCLUDE_AND_DISCLOSE
+    expect:
+      intent: RELATION_SEARCH
+      families: [ETF_KR]
+      decision: ABSTAIN
+      reason_codes: [EXTERNAL_EVIDENCE_MISSING]
+
+  # --- 9. alias/동명 충돌 ---
+  - id: G-022
+    axis: alias_resolution
+    question: "Samsung Electronics 보유 ETF (영문 alias)"
+    query_spec:
+      version: "1.0"
+      intent: RELATION_SEARCH
+      product_families: [ETF_KR]
+      entities: []
+      filters: []
+      relationship_filters: [{relation: HOLDS, target_entity: "Samsung Electronics"}]
+      metrics: []
+      preferences: []
+      sort: []
+      limit: 5
+      as_of_requirement: SHOW_FIELD_DATE
+      missing_policy: EXCLUDE_AND_DISCLOSE
+    expect:
+      intent: RELATION_SEARCH
+      families: [ETF_KR]
+      decision: ANSWER
+      min_candidates: 1
+
+  - id: G-023
+    axis: alias_resolution
+    question: "삼성전자(영문 오타) 보유 ETF"
+    query_spec:
+      version: "1.0"
+      intent: RELATION_SEARCH
+      product_families: [ETF_KR]
+      entities: []
+      filters: []
+      relationship_filters: [{relation: HOLDS, target_entity: "Samsng Electronics"}]
+      metrics: []
+      preferences: []
+      sort: []
+      limit: 5
+      as_of_requirement: SHOW_FIELD_DATE
+      missing_policy: EXCLUDE_AND_DISCLOSE
+    expect:
+      intent: RELATION_SEARCH
+      families: [ETF_KR]
+      decision: ABSTAIN
+      reason_codes: [ENTITY_NOT_FOUND]
+
+  # --- 10. 모호 표현 ASK ---
+  - id: G-024
+    axis: vague_ask
+    question: "채권에 투자지역 조건을 적용 (지원 안 되는 필드)"
+    query_spec:
+      version: "1.0"
+      intent: FILTER
+      product_families: [BOND_KR]
+      entities: []
+      filters: [{field: investment_region, operator: CONTAINS, value: "미국"}]
+      relationship_filters: []
+      metrics: []
+      preferences: []
+      sort: []
+      limit: 5
+      as_of_requirement: SHOW_FIELD_DATE
+      missing_policy: EXCLUDE_AND_DISCLOSE
+    expect:
+      intent: FILTER
+      families: [BOND_KR]
+      decision: ASK
+      reason_codes: [AMBIGUOUS_PRODUCT_SCOPE]
+
+  - id: G-025
+    axis: vague_ask
+    question: "상품명에 대해 잘못된 연산자 사용"
+    query_spec:
+      version: "1.0"
+      intent: FILTER
+      product_families: [ETF_KR]
+      entities: []
+      filters: [{field: product_name, operator: GTE, value: "1"}]
+      relationship_filters: []
+      metrics: []
+      preferences: []
+      sort: []
+      limit: 5
+      as_of_requirement: SHOW_FIELD_DATE
+      missing_policy: EXCLUDE_AND_DISCLOSE
+    expect:
+      intent: FILTER
+      families: [ETF_KR]
+      decision: ASK
+      reason_codes: [MISSING_FILTERS]
+
+  # --- 11. 수익률 기간 누락 ASK ---
+  - id: G-026
+    axis: missing_period_ask
+    question: "필터 없이 순위 질문 (rank 누락)"
+    query_spec:
+      version: "1.0"
+      intent: FILTER_AND_RANK
+      product_families: [FUND_PUBLIC]
+      entities: []
+      filters: [{field: return_1y, operator: NOT_NULL}]
+      relationship_filters: []
+      metrics: []
+      preferences: []
+      sort: []
+      limit: 5
+      as_of_requirement: SHOW_FIELD_DATE
+      missing_policy: EXCLUDE_AND_DISCLOSE
+    expect:
+      intent: FILTER_AND_RANK
+      families: [FUND_PUBLIC]
+      decision: ASK
+      reason_codes: [MISSING_RANKING]
+
+  - id: G-027
+    axis: missing_period_ask
+    question: "필터 없이 검색 요청"
+    query_spec:
+      version: "1.0"
+      intent: FILTER
+      product_families: [ETF_KR]
+      entities: []
+      filters: []
+      relationship_filters: []
+      metrics: []
+      preferences: []
+      sort: []
+      limit: 5
+      as_of_requirement: SHOW_FIELD_DATE
+      missing_policy: EXCLUDE_AND_DISCLOSE
+    expect:
+      intent: FILTER
+      families: [ETF_KR]
+      decision: ASK
+      reason_codes: [MISSING_FILTERS]
+
+  # --- 12. 데이터 부재 ABSTAIN ---
+  - id: G-028
+    axis: data_absent_abstain
+    question: "존재하지 않는 상품명 조회"
+    query_spec:
+      version: "1.0"
+      intent: LOOKUP_PRODUCT
+      product_families: [ETF_KR]
+      entities: []
+      filters: [{field: product_name, operator: CONTAINS, value: "존재하지않는상품XYZ"}]
+      relationship_filters: []
+      metrics: []
+      preferences: []
+      sort: []
+      limit: 5
+      as_of_requirement: SHOW_FIELD_DATE
+      missing_policy: EXCLUDE_AND_DISCLOSE
+    expect:
+      intent: LOOKUP_PRODUCT
+      families: [ETF_KR]
+      decision: ABSTAIN
+      reason_codes: [NO_VALID_CANDIDATE]
+
+  - id: G-029
+    axis: data_absent_abstain
+    question: "0건 필터 (잔존일수 0일 미만)"
+    query_spec:
+      version: "1.0"
+      intent: FILTER
+      product_families: [BOND_KR]
+      entities: []
+      filters: [{field: remaining_days, operator: LTE, value: 0}]
+      relationship_filters: []
+      metrics: [remaining_days]
+      preferences: []
+      sort: []
+      limit: 5
+      as_of_requirement: SHOW_FIELD_DATE
+      missing_policy: EXCLUDE_AND_DISCLOSE
+    expect:
+      intent: FILTER
+      families: [BOND_KR]
+      decision: ABSTAIN
+      reason_codes: [QUALITY_BLOCKED]
+
+  # --- 13. 존재하지 않는 상품/신용등급 ---
+  - id: G-030
+    axis: nonexistent_value
+    question: "존재하지 않는 표면금리 조건"
+    query_spec:
+      version: "1.0"
+      intent: FILTER
+      product_families: [BOND_KR]
+      entities: []
+      filters: [{field: coupon_rate, operator: GTE, value: 100}]
+      relationship_filters: []
+      metrics: [coupon_rate]
+      preferences: []
+      sort: []
+      limit: 5
+      as_of_requirement: SHOW_FIELD_DATE
+      missing_policy: EXCLUDE_AND_DISCLOSE
+    expect:
+      intent: FILTER
+      families: [BOND_KR]
+      decision: ABSTAIN
+      reason_codes: [NO_VALID_CANDIDATE]
+
+  - id: G-031
+    axis: nonexistent_value
+    question: "알 수 없는 논리 필드 사용"
+    query_spec:
+      version: "1.0"
+      intent: FILTER
+      product_families: [ETF_KR]
+      entities: []
+      filters: [{field: totally_unknown_field, operator: EQ, value: "x"}]
+      relationship_filters: []
+      metrics: []
+      preferences: []
+      sort: []
+      limit: 5
+      as_of_requirement: SHOW_FIELD_DATE
+      missing_policy: EXCLUDE_AND_DISCLOSE
+    expect:
+      intent: FILTER
+      families: [ETF_KR]
+      decision: ABSTAIN
+      reason_codes: [FIELD_NOT_AVAILABLE]
+
+  # --- 14. 미래 예측 ---
+  - id: G-032
+    axis: future_prediction
+    question: "향후 수익률을 예측해줘"
+    query_spec:
+      version: "1.0"
+      intent: UNSUPPORTED_PREDICTION
+      product_families: []
+      entities: []
+      filters: []
+      relationship_filters: []
+      metrics: []
+      preferences: []
+      sort: []
+      limit: 5
+      as_of_requirement: SHOW_FIELD_DATE
+      missing_policy: EXCLUDE_AND_DISCLOSE
+    expect:
+      intent: UNSUPPORTED_PREDICTION
+      families: []
+      decision: ABSTAIN
+      reason_codes: [UNSUPPORTED_PREDICTION]
+
+  - id: G-033
+    axis: future_prediction
+    question: "미래 가격을 예측하는 실행 불가 질의"
+    query_spec:
+      version: "1.0"
+      intent: UNSUPPORTED_PREDICTION
+      product_families: []
+      entities: []
+      filters: []
+      relationship_filters: []
+      metrics: []
+      preferences: []
+      sort: []
+      limit: 5
+      as_of_requirement: SHOW_FIELD_DATE
+      missing_policy: EXCLUDE_AND_DISCLOSE
+    expect:
+      intent: UNSUPPORTED_PREDICTION
+      families: []
+      decision: ABSTAIN
+      reason_codes: [UNSUPPORTED_PREDICTION]
+
+  # --- 15. 후보 0건 ---
+  - id: G-034
+    axis: zero_candidates
+    question: "해외 ETF NAV 괴�리율 정렬 (rank 차단)"
+    query_spec:
+      version: "1.0"
+      intent: FILTER_AND_RANK
+      product_families: [ETF_GLOBAL]
+      entities: []
+      filters: [{field: aum, operator: GTE, value: 1}]
+      relationship_filters: []
+      metrics: [nav_discount]
+      preferences: [{field: nav_discount, direction: ASC, priority: 1}]
+      sort: []
+      limit: 5
+      as_of_requirement: SHOW_FIELD_DATE
+      missing_policy: EXCLUDE_AND_DISCLOSE
+    expect:
+      intent: FILTER_AND_RANK
+      families: [ETF_GLOBAL]
+      decision: ABSTAIN
+      reason_codes: [FIELD_NOT_AVAILABLE]
+
+  - id: G-035
+    axis: zero_candidates
+    question: "SQL 토큰이 담긴 필터 값 (안전 차단)"
+    query_spec:
+      version: "1.0"
+      intent: FILTER
+      product_families: [ETF_KR]
+      entities: []
+      filters: [{field: product_name, operator: CONTAINS, value: "SELECT * FROM x"}]
+      relationship_filters: []
+      metrics: []
+      preferences: []
+      sort: []
+      limit: 5
+      as_of_requirement: SHOW_FIELD_DATE
+      missing_policy: EXCLUDE_AND_DISCLOSE
+    expect:
+      intent: FILTER
+      families: [ETF_KR]
+      decision: ABSTAIN
+      reason_codes: [VALIDATION_FAILED]
+
+  # --- 16. 결측/0/sentinel ---
+  - id: G-036
+    axis: missing_zero_sentinel
+    question: "수익률이 없는 공모펀드 제외 (NOT_NULL)"
+    query_spec:
+      version: "1.0"
+      intent: FILTER
+      product_families: [FUND_PUBLIC]
+      entities: []
+      filters: [{field: return_1y, operator: NOT_NULL}]
+      relationship_filters: []
+      metrics: [return_1y]
+      preferences: []
+      sort: []
+      limit: 5
+      as_of_requirement: SHOW_FIELD_DATE
+      missing_policy: EXCLUDE_AND_DISCLOSE
+    expect:
+      intent: FILTER
+      families: [FUND_PUBLIC]
+      decision: ANSWER
+      min_candidates: 1
+
+  - id: G-037
+    axis: missing_zero_sentinel
+    question: "순자산이 있는 해외 ETF (NOT_NULL)"
+    query_spec:
+      version: "1.0"
+      intent: FILTER
+      product_families: [ETF_GLOBAL]
+      entities: []
+      filters: [{field: aum, operator: NOT_NULL}]
+      relationship_filters: []
+      metrics: [aum]
+      preferences: []
+      sort: []
+      limit: 5
+      as_of_requirement: SHOW_FIELD_DATE
+      missing_policy: EXCLUDE_AND_DISCLOSE
+    expect:
+      intent: FILTER
+      families: [ETF_GLOBAL]
+      decision: ANSWER
+      min_candidates: 1
+
+  - id: G-038
+    axis: missing_zero_sentinel
+    question: "표면금리 0%인 채권"
+    query_spec:
+      version: "1.0"
+      intent: FILTER
+      product_families: [BOND_KR]
+      entities: []
+      filters: [{field: coupon_rate, operator: EQ, value: 0}]
+      relationship_filters: []
+      metrics: [coupon_rate]
+      preferences: []
+      sort: []
+      limit: 5
+      as_of_requirement: SHOW_FIELD_DATE
+      missing_policy: EXCLUDE_AND_DISCLOSE
+    expect:
+      intent: FILTER
+      families: [BOND_KR]
+      decision: ABSTAIN
+      reason_codes: [QUALITY_BLOCKED]
+
+  # --- 17. 기준일 불일치 ---
+  - id: G-039
+    axis: asof_mismatch
+    question: "해외 ETF 종가(NOT_NULL) 필터"
+    query_spec:
+      version: "1.0"
+      intent: FILTER
+      product_families: [ETF_GLOBAL]
+      entities: []
+      filters: [{field: price, operator: NOT_NULL}]
+      relationship_filters: []
+      metrics: [price, nav]
+      preferences: []
+      sort: []
+      limit: 5
+      as_of_requirement: SHOW_FIELD_DATE
+      missing_policy: EXCLUDE_AND_DISCLOSE
+    expect:
+      intent: FILTER
+      families: [ETF_GLOBAL]
+      decision: ANSWER
+      min_candidates: 1
+
+  - id: G-040
+    axis: asof_mismatch
+    question: "해외 ETF NAV 정렬 (날짜 불일치 disclosure)"
+    query_spec:
+      version: "1.0"
+      intent: FILTER_AND_RANK
+      product_families: [ETF_GLOBAL]
+      entities: []
+      filters: [{field: nav, operator: NOT_NULL}]
+      relationship_filters: []
+      metrics: [nav, price]
+      preferences: [{field: nav, direction: DESC, priority: 1}]
+      sort: []
+      limit: 5
+      as_of_requirement: SHOW_FIELD_DATE
+      missing_policy: EXCLUDE_AND_DISCLOSE
+    expect:
+      intent: FILTER_AND_RANK
+      families: [ETF_GLOBAL]
+      decision: ANSWER
+      min_candidates: 1
+
+  # --- 18. 부분 coverage ---
+  - id: G-041
+    axis: partial_coverage
+    question: "국내 ETF 보수 정렬 (부분 coverage)"
+    query_spec:
+      version: "1.0"
+      intent: FILTER_AND_RANK
+      product_families: [ETF_KR]
+      entities: []
+      filters: [{field: expense_ratio, operator: NOT_NULL}]
+      relationship_filters: []
+      metrics: [expense_ratio, aum]
+      preferences: [{field: expense_ratio, direction: ASC, priority: 1}]
+      sort: []
+      limit: 5
+      as_of_requirement: SHOW_FIELD_DATE
+      missing_policy: EXCLUDE_AND_DISCLOSE
+    expect:
+      intent: FILTER_AND_RANK
+      families: [ETF_KR]
+      decision: ANSWER
+      min_candidates: 1
+
+  - id: G-042
+    axis: partial_coverage
+    question: "공모펀드 순자산 정렬 (부분 coverage)"
+    query_spec:
+      version: "1.0"
+      intent: FILTER_AND_RANK
+      product_families: [FUND_PUBLIC]
+      entities: []
+      filters: [{field: aum, operator: NOT_NULL}]
+      relationship_filters: []
+      metrics: [aum, return_1y]
+      preferences: [{field: aum, direction: DESC, priority: 1}]
+      sort: []
+      limit: 5
+      as_of_requirement: SHOW_FIELD_DATE
+      missing_policy: EXCLUDE_AND_DISCLOSE
+    expect:
+      intent: FILTER_AND_RANK
+      families: [FUND_PUBLIC]
+      decision: ANSWER
+      min_candidates: 1
+
+  - id: G-043
+    axis: partial_coverage
+    question: "미국 투자 국내 ETF 보수 정렬 (0건 coverage 경계)"
+    query_spec:
+      version: "1.0"
+      intent: FILTER_AND_RANK
+      product_families: [ETF_KR]
+      entities: []
+      filters: [{field: investment_region, operator: CONTAINS, value: "미국"}]
+      relationship_filters: []
+      metrics: [expense_ratio, aum]
+      preferences: [{field: expense_ratio, direction: ASC, priority: 1}]
+      sort: []
+      limit: 5
+      as_of_requirement: SHOW_FIELD_DATE
+      missing_policy: EXCLUDE_AND_DISCLOSE
+    expect:
+      intent: FILTER_AND_RANK
+      families: [ETF_KR]
+      decision: ABSTAIN
+      reason_codes: [NO_VALID_CANDIDATE]
+
+  # --- 19. 공모/사모 방어 ---
+  - id: G-044
+    axis: public_private_guard
+    question: "공모펀드만 1년 수익률 정렬"
+    query_spec:
+      version: "1.0"
+      intent: FILTER_AND_RANK
+      product_families: [FUND_PUBLIC]
+      entities: []
+      filters: [{field: return_1y, operator: NOT_NULL}]
+      relationship_filters: []
+      metrics: [return_1y]
+      preferences: [{field: return_1y, direction: DESC, priority: 1}]
+      sort: []
+      limit: 5
+      as_of_requirement: SHOW_FIELD_DATE
+      missing_policy: EXCLUDE_AND_DISCLOSE
+    expect:
+      intent: FILTER_AND_RANK
+      families: [FUND_PUBLIC]
+      decision: ANSWER
+      min_candidates: 1
+
+  - id: G-045
+    axis: public_private_guard
+    question: "사모펀드 요청은 공모만 응답 (가족 제한)"
+    query_spec:
+      version: "1.0"
+      intent: FILTER
+      product_families: [FUND_PUBLIC]
+      entities: []
+      filters: [{field: asset_type, operator: CONTAINS, value: "사모"}]
+      relationship_filters: []
+      metrics: []
+      preferences: []
+      sort: []
+      limit: 5
+      as_of_requirement: SHOW_FIELD_DATE
+      missing_policy: EXCLUDE_AND_DISCLOSE
+    expect:
+      intent: FILTER
+      families: [FUND_PUBLIC]
+      decision: ABSTAIN
+      reason_codes: [NO_VALID_CANDIDATE]
+
+  # --- 20. 구매 가능 잘못된 근거 방어 ---
+  - id: G-046
+    axis: buyable_guard
+    question: "잔존일수 필터로 채권 후보 (buyable_quantity 미사용)"
+    query_spec:
+      version: "1.0"
+      intent: FILTER
+      product_families: [BOND_KR]
+      entities: []
+      filters: [{field: remaining_days, operator: LTE, value: 30}]
+      relationship_filters: []
+      metrics: [remaining_days, applied_yield]
+      preferences: []
+      sort: []
+      limit: 5
+      as_of_requirement: SHOW_FIELD_DATE
+      missing_policy: EXCLUDE_AND_DISCLOSE
+    expect:
+      intent: FILTER
+      families: [BOND_KR]
+      decision: ANSWER
+      min_candidates: 1
+
+  - id: G-047
+    axis: buyable_guard
+    question: "buyable_quantity는 미등록 필드라 차단"
+    query_spec:
+      version: "1.0"
+      intent: FILTER
+      product_families: [BOND_KR]
+      entities: []
+      filters: [{field: buyable_quantity, operator: GTE, value: 1}]
+      relationship_filters: []
+      metrics: []
+      preferences: []
+      sort: []
+      limit: 5
+      as_of_requirement: SHOW_FIELD_DATE
+      missing_policy: EXCLUDE_AND_DISCLOSE
+    expect:
+      intent: FILTER
+      families: [BOND_KR]
+      decision: ABSTAIN
+      reason_codes: [FIELD_NOT_AVAILABLE]
+
+  # --- 추가 커버리지 (무결성/guard) ---
+  - id: G-048
+    axis: answer_guard
+    question: "해외 ETF 순자산 정렬 (답변 guard 검증)"
+    query_spec:
+      version: "1.0"
+      intent: FILTER_AND_RANK
+      product_families: [ETF_GLOBAL]
+      entities: []
+      filters: [{field: aum, operator: NOT_NULL}]
+      relationship_filters: []
+      metrics: [aum, return_1d]
+      preferences: [{field: aum, direction: DESC, priority: 1}]
+      sort: []
+      limit: 5
+      as_of_requirement: SHOW_FIELD_DATE
+      missing_policy: EXCLUDE_AND_DISCLOSE
+    expect:
+      intent: FILTER_AND_RANK
+      families: [ETF_GLOBAL]
+      decision: ANSWER
+      min_candidates: 1
+
+  - id: G-049
+    axis: answer_guard
+    question: "관계 필터 없는 관계 검색"
+    query_spec:
+      version: "1.0"
+      intent: RELATION_SEARCH
+      product_families: [ETF_KR]
+      entities: []
+      filters: []
+      relationship_filters: []
+      metrics: []
+      preferences: []
+      sort: []
+      limit: 5
+      as_of_requirement: SHOW_FIELD_DATE
+      missing_policy: EXCLUDE_AND_DISCLOSE
+    expect:
+      intent: RELATION_SEARCH
+      families: [ETF_KR]
+      decision: ASK
+      reason_codes: [MISSING_FILTERS]
+
+  - id: G-050
+    axis: ambiguous_entity
+    question: "미등록 entity 표현 (grounding 확인 요청)"
+    query_spec:
+      version: "1.0"
+      intent: LOOKUP_PRODUCT
+      product_families: [ETF_KR]
+      entities: [{text: "미등록모호토큰", entity_type: PRODUCT}]
+      filters: [{field: product_name, operator: CONTAINS, value: "KODEX"}]
+      relationship_filters: []
+      metrics: []
+      preferences: []
+      sort: []
+      limit: 5
+      as_of_requirement: SHOW_FIELD_DATE
+      missing_policy: EXCLUDE_AND_DISCLOSE
+    expect:
+      intent: LOOKUP_PRODUCT
+      families: [ETF_KR]
+      decision: ASK
+      reason_codes: [AMBIGUOUS_ENTITY]

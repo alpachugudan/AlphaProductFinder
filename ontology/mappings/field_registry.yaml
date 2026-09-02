@@ -1,0 +1,332 @@
+fields:
+  - id: product_name
+    label_ko: 상품명
+    value_type: string
+    unit: null
+    families:
+      BOND_KR: {source_field: pd_nm, date_field: info_base_dt, coverage: full, comparable_scope: within_family}
+      ETF_KR: {source_field: pd_nm, date_field: du_upt_dt, coverage: full, comparable_scope: within_family}
+      ETF_GLOBAL: {source_field: pd_nm, date_field: du_upt_dt, coverage: full, comparable_scope: within_family}
+      FUND_PUBLIC: {source_field: itm_nm, date_field: fd_price_bas_dt, coverage: full, comparable_scope: within_family}
+    operators: [EQ, CONTAINS, IS_NULL, NOT_NULL]
+    quality_exclusions: [MISSING]
+
+  - id: manager_or_issuer
+    label_ko: 운용사/발행사
+    value_type: string
+    unit: null
+    families:
+      BOND_KR: {source_field: pd_pbcm, date_field: info_base_dt, coverage: full, comparable_scope: within_family}
+      ETF_KR: {source_field: cu_fund_mgmt_co, date_field: wu_upt_dt, coverage: full, comparable_scope: within_family}
+      ETF_GLOBAL: {source_field: cu_fund_mgmt_co, date_field: wu_upt_dt, coverage: full, comparable_scope: within_family}
+    operators: [EQ, CONTAINS, IN, IS_NULL, NOT_NULL]
+    quality_exclusions: [MISSING]
+
+  - id: currency
+    label_ko: 통화
+    value_type: string
+    unit: null
+    families:
+      BOND_KR: {source_field: curr_cd, date_field: info_base_dt, coverage: full, comparable_scope: within_family}
+    operators: [EQ, IN, IS_NULL, NOT_NULL]
+    quality_exclusions: [MISSING]
+
+  - id: market
+    label_ko: 시장
+    value_type: string
+    unit: null
+    families:
+      BOND_KR: {source_field: pd_exg_mkt, date_field: info_base_dt, coverage: full, comparable_scope: within_family}
+    operators: [EQ, IN, IS_NULL, NOT_NULL]
+    quality_exclusions: [MISSING]
+
+  - id: asset_type
+    label_ko: 자산유형
+    value_type: string
+    unit: null
+    families:
+      BOND_KR: {source_field: bd_knd, date_field: info_base_dt, coverage: full, comparable_scope: within_family}
+      ETF_KR: {source_field: wu_inv_ast_type, date_field: wu_upt_dt, coverage: full, comparable_scope: within_family}
+      ETF_GLOBAL: {source_field: wu_inv_ast_type, date_field: wu_upt_dt, coverage: full, comparable_scope: within_family}
+      FUND_PUBLIC: {source_field: or_attr_desc, date_field: fd_price_bas_dt, coverage: full, comparable_scope: within_family}
+    operators: [EQ, IN, CONTAINS, IS_NULL, NOT_NULL]
+    quality_exclusions: [MISSING]
+
+  - id: investment_region
+    label_ko: 투자지역
+    value_type: string
+    unit: null
+    families:
+      ETF_KR: {source_field: wu_inv_rgn, date_field: wu_upt_dt, coverage: full, comparable_scope: within_family}
+      ETF_GLOBAL: {source_field: wu_inv_rgn, date_field: wu_upt_dt, coverage: full, comparable_scope: within_family}
+      FUND_PUBLIC: {source_field: fd_ivst_rgn_desc, date_field: fd_price_bas_dt, coverage: full, comparable_scope: within_family}
+    operators: [EQ, IN, CONTAINS, IS_NULL, NOT_NULL]
+    quality_exclusions: [MISSING]
+
+  - id: risk_label
+    label_ko: 위험등급
+    value_type: string
+    unit: null
+    families:
+      BOND_KR: {source_field: pd_risk_nm, date_field: info_base_dt, coverage: full, comparable_scope: within_family_only}
+      FUND_PUBLIC: {source_field: zrin_fd_ivst_risk_grd_nm, date_field: fd_price_bas_dt, coverage: full, comparable_scope: within_family_only}
+    operators: [EQ, IN, IS_NULL, NOT_NULL]
+    quality_exclusions: [MISSING]
+
+  - id: sale_status
+    label_ko: 판매상태
+    value_type: string
+    unit: null
+    families:
+      ETF_KR: {source_field: pd_sale_yn, date_field: du_upt_dt, coverage: full, comparable_scope: within_family}
+      ETF_GLOBAL: {source_field: pd_sale_yn, date_field: du_upt_dt, coverage: full, comparable_scope: within_family}
+      FUND_PUBLIC: {source_field: sale_yn, date_field: fd_price_bas_dt, coverage: full, comparable_scope: within_family}
+    operators: [EQ, IN, IS_NULL, NOT_NULL]
+    quality_exclusions: [MISSING]
+
+  - id: as_of_date
+    label_ko: 기준일
+    value_type: date
+    unit: null
+    families:
+      BOND_KR: {source_field: info_base_dt, date_field: info_base_dt, coverage: full, comparable_scope: within_family}
+      ETF_KR: {source_field: du_upt_dt, date_field: du_upt_dt, coverage: full, comparable_scope: within_family}
+      ETF_GLOBAL: {source_field: du_upt_dt, date_field: du_upt_dt, coverage: full, comparable_scope: within_family}
+      FUND_PUBLIC: {source_field: fd_price_bas_dt, date_field: fd_price_bas_dt, coverage: full, comparable_scope: within_family}
+    operators: [EQ, GTE, LTE, BETWEEN, IS_NULL, NOT_NULL]
+    quality_exclusions: [MISSING, SENTINEL_OR_INVALID_DATE]
+
+  - id: credit_grade
+    label_ko: 신용등급
+    value_type: string
+    unit: null
+    families:
+      BOND_KR: {source_field: crd_grd, date_field: crd_grd_dt, coverage: full, comparable_scope: within_family_only}
+    operators: [EQ, IN, IS_NULL, NOT_NULL]
+    quality_exclusions: [MISSING]
+
+  - id: bond_type
+    label_ko: 채권종류
+    value_type: string
+    unit: null
+    families:
+      BOND_KR: {source_field: bd_knd, date_field: info_base_dt, coverage: full, comparable_scope: within_family}
+    operators: [EQ, IN, IS_NULL, NOT_NULL]
+    quality_exclusions: [MISSING]
+
+  - id: remaining_days
+    label_ko: 잔존일수
+    value_type: integer
+    unit: day
+    families:
+      BOND_KR: {source_field: remaining_days, date_field: sale_yield_base_dt, coverage: full, comparable_scope: within_family}
+    operators: [EQ, GTE, LTE, BETWEEN, IS_NULL, NOT_NULL]
+    quality_exclusions: [MISSING, ZERO_VALUE]
+
+  - id: applied_yield
+    label_ko: 적용수익률
+    value_type: decimal
+    unit: percent
+    families:
+      BOND_KR: {source_field: applied_yield, date_field: sale_yield_base_dt, coverage: full, comparable_scope: within_family}
+    operators: [EQ, GTE, LTE, BETWEEN, IS_NULL, NOT_NULL]
+    quality_exclusions: [MISSING, ZERO_VALUE, OUTLIER_REVIEW]
+
+  - id: coupon_rate
+    label_ko: 표면금리
+    value_type: decimal
+    unit: percent
+    families:
+      BOND_KR: {source_field: srfc_irt, date_field: info_base_dt, coverage: full, comparable_scope: within_family}
+    operators: [EQ, GTE, LTE, BETWEEN, IS_NULL, NOT_NULL]
+    quality_exclusions: [MISSING, ZERO_VALUE]
+
+  - id: duration
+    label_ko: 듀레이션
+    value_type: decimal
+    unit: year
+    families:
+      BOND_KR: {source_field: dur, date_field: exg_close_price_base_dt, coverage: full, comparable_scope: within_family}
+    operators: [EQ, GTE, LTE, BETWEEN, IS_NULL, NOT_NULL]
+    quality_exclusions: [MISSING, ZERO_VALUE]
+
+  - id: evaluation_price
+    label_ko: 평가단가
+    value_type: decimal
+    unit: price
+    families:
+      BOND_KR: {source_field: eval_price, date_field: exg_close_price_base_dt, coverage: full, comparable_scope: within_family}
+    operators: [EQ, GTE, LTE, BETWEEN, IS_NULL, NOT_NULL]
+    quality_exclusions: [MISSING, ZERO_VALUE]
+
+  - id: issue_balance
+    label_ko: 발행잔액
+    value_type: decimal
+    unit: krw
+    families:
+      BOND_KR: {source_field: isu_bal_amt, date_field: info_base_dt, coverage: full, comparable_scope: within_family}
+    operators: [EQ, GTE, LTE, BETWEEN, IS_NULL, NOT_NULL]
+    quality_exclusions: [MISSING, ZERO_VALUE]
+
+  - id: maturity_date
+    label_ko: 만기일
+    value_type: date
+    unit: null
+    families:
+      BOND_KR: {source_field: mat_dt, date_field: mat_dt, coverage: full, comparable_scope: within_family}
+    operators: [EQ, GTE, LTE, BETWEEN, IS_NULL, NOT_NULL]
+    quality_exclusions: [MISSING, SENTINEL_OR_INVALID_DATE]
+
+  - id: strategy
+    label_ko: 전략
+    value_type: string
+    unit: null
+    families:
+      ETF_KR: {source_field: cu_strtegy, date_field: wu_upt_dt, coverage: full, comparable_scope: within_family}
+      ETF_GLOBAL: {source_field: cu_strtegy, date_field: wu_upt_dt, coverage: full, comparable_scope: within_family}
+    operators: [EQ, CONTAINS, IN, IS_NULL, NOT_NULL]
+    quality_exclusions: [MISSING]
+
+  - id: expense_ratio
+    label_ko: 보수
+    value_type: decimal
+    unit: percent
+    families:
+      ETF_KR:
+        source_field: cu_charge_rt
+        date_field: wu_upt_dt
+        coverage: partial
+        comparable_scope: within_family_subset
+      ETF_GLOBAL:
+        source_field: cu_charge_rt
+        date_field: wu_upt_dt
+        coverage: full
+        comparable_scope: within_family
+    operators: [EQ, GTE, LTE, BETWEEN, IS_NULL, NOT_NULL]
+    quality_exclusions: [MISSING, UNIT_OUTLIER, PARTIAL_COVERAGE]
+
+  - id: base_index
+    label_ko: 기초지수
+    value_type: string
+    unit: null
+    families:
+      ETF_KR:
+        source_field: cu_base_index
+        date_field: wu_upt_dt
+        coverage: partial
+        comparable_scope: within_family_subset
+      ETF_GLOBAL:
+        source_field: cu_base_index
+        date_field: wu_upt_dt
+        coverage: full
+        comparable_scope: within_family
+    operators: [EQ, CONTAINS, IS_NULL, NOT_NULL]
+    quality_exclusions: [MISSING, PARTIAL_COVERAGE]
+
+  - id: aum
+    label_ko: 순자산
+    value_type: decimal
+    unit: krw
+    families:
+      ETF_KR: {source_field: du_last_aum, date_field: du_upt_dt, coverage: full, comparable_scope: within_family}
+      ETF_GLOBAL: {source_field: du_last_aum, date_field: du_upt_dt, coverage: full, comparable_scope: within_family}
+      FUND_PUBLIC: {source_field: fd_nast_suma, date_field: fd_price_bas_dt, coverage: partial, comparable_scope: within_family_subset}
+    operators: [EQ, GTE, LTE, BETWEEN, IS_NULL, NOT_NULL]
+    quality_exclusions: [MISSING, ZERO_VALUE, PARTIAL_COVERAGE]
+
+  - id: return_1d
+    label_ko: 1일 수익률
+    value_type: decimal
+    unit: percent
+    families:
+      ETF_KR: {source_field: du_er_1d, date_field: du_upt_dt, coverage: full, comparable_scope: within_family}
+      ETF_GLOBAL: {source_field: du_er_1d, date_field: du_upt_dt, coverage: full, comparable_scope: within_family}
+    operators: [EQ, GTE, LTE, BETWEEN, IS_NULL, NOT_NULL]
+    quality_exclusions: [MISSING, ZERO_VALUE]
+    requires_period: true
+
+  - id: return_1m
+    label_ko: 1개월 수익률
+    value_type: decimal
+    unit: percent
+    families:
+      FUND_PUBLIC: {source_field: fd_mm1_ern_r, date_field: fd_price_bas_dt, coverage: partial, comparable_scope: within_family_subset}
+    operators: [EQ, GTE, LTE, BETWEEN, IS_NULL, NOT_NULL]
+    quality_exclusions: [MISSING, ZERO_VALUE, PARTIAL_COVERAGE]
+    requires_period: true
+
+  - id: return_1y
+    label_ko: 1년 수익률
+    value_type: decimal
+    unit: percent
+    families:
+      FUND_PUBLIC: {source_field: fd_yr1_ern_r, date_field: fd_price_bas_dt, coverage: partial, comparable_scope: within_family_subset}
+    operators: [EQ, GTE, LTE, BETWEEN, IS_NULL, NOT_NULL]
+    quality_exclusions: [MISSING, ZERO_VALUE, PARTIAL_COVERAGE]
+    requires_period: true
+
+  - id: price
+    label_ko: 종가
+    value_type: decimal
+    unit: price
+    families:
+      ETF_GLOBAL: {source_field: du_clpr, date_field: du_clpr_base_dt, coverage: full, comparable_scope: within_family}
+    operators: [EQ, GTE, LTE, BETWEEN, IS_NULL, NOT_NULL]
+    quality_exclusions: [MISSING, DATE_MISMATCH]
+
+  - id: nav
+    label_ko: NAV
+    value_type: decimal
+    unit: price
+    families:
+      ETF_GLOBAL: {source_field: du_last_nav, date_field: du_nav_base_dt, coverage: full, comparable_scope: within_family}
+    operators: [EQ, GTE, LTE, BETWEEN, IS_NULL, NOT_NULL]
+    quality_exclusions: [MISSING, DATE_MISMATCH]
+
+  - id: volume
+    label_ko: 거래량
+    value_type: decimal
+    unit: count
+    families:
+      ETF_GLOBAL: {source_field: du_vol_1d, date_field: du_upt_dt, coverage: full, comparable_scope: within_family}
+    operators: [EQ, GTE, LTE, BETWEEN, IS_NULL, NOT_NULL]
+    quality_exclusions: [MISSING, ZERO_VALUE]
+
+  - id: trading_value
+    label_ko: 거래대금
+    value_type: decimal
+    unit: krw
+    families:
+      ETF_GLOBAL: {source_field: du_val_1d, date_field: du_upt_dt, coverage: full, comparable_scope: within_family}
+    operators: [EQ, GTE, LTE, BETWEEN, IS_NULL, NOT_NULL]
+    quality_exclusions: [MISSING, ZERO_VALUE]
+
+  - id: nav_discount
+    label_ko: NAV 괴리율
+    value_type: decimal
+    unit: percent
+    rank_blocked: true
+    filterable: true
+    sortable: false
+    families:
+      ETF_GLOBAL: {source_field: du_diff_rt, date_field: du_nav_base_dt, coverage: full, comparable_scope: within_family, sortable: false}
+    operators: [EQ, GTE, LTE, BETWEEN, IS_NULL, NOT_NULL]
+    quality_exclusions: [MISSING, DATE_MISMATCH]
+
+  - id: hedged
+    label_ko: 환헤지
+    value_type: boolean
+    unit: null
+    families:
+      FUND_PUBLIC: {source_field: exchdg_yn, date_field: fd_price_bas_dt, coverage: full, comparable_scope: within_family}
+    operators: [EQ, IS_NULL, NOT_NULL]
+    quality_exclusions: [MISSING]
+
+  - id: in_house_sale
+    label_ko: 당사판매
+    value_type: string
+    unit: null
+    families:
+      FUND_PUBLIC: {source_field: thco_sale_yn, date_field: fd_price_bas_dt, coverage: full, comparable_scope: within_family}
+    operators: [EQ, IN, IS_NULL, NOT_NULL]
+    quality_exclusions: [MISSING]

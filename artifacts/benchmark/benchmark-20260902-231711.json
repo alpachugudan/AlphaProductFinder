@@ -1,0 +1,727 @@
+{
+  "schema_version": "benchmark-report-1.0",
+  "provider": "mock",
+  "dataset_version": "2026-07-11-baseline",
+  "case_count": 50,
+  "runs_per_phase": 1,
+  "thresholds_ms": {
+    "total_p50": 8000,
+    "total_p95": 20000
+  },
+  "summary": {
+    "cold": {
+      "count": 50,
+      "p50_ms": 171,
+      "p95_ms": 1419,
+      "max_ms": 4557
+    },
+    "warm": {
+      "count": 50,
+      "p50_ms": 146,
+      "p95_ms": 1595,
+      "max_ms": 4496
+    }
+  },
+  "samples": [
+    {
+      "phase": "cold",
+      "run": 1,
+      "case_id": "G-001",
+      "elapsed_ms": 393,
+      "decision": "ANSWER"
+    },
+    {
+      "phase": "cold",
+      "run": 1,
+      "case_id": "G-002",
+      "elapsed_ms": 134,
+      "decision": "ANSWER"
+    },
+    {
+      "phase": "cold",
+      "run": 1,
+      "case_id": "G-003",
+      "elapsed_ms": 182,
+      "decision": "ANSWER"
+    },
+    {
+      "phase": "cold",
+      "run": 1,
+      "case_id": "G-004",
+      "elapsed_ms": 1202,
+      "decision": "ANSWER"
+    },
+    {
+      "phase": "cold",
+      "run": 1,
+      "case_id": "G-005",
+      "elapsed_ms": 79,
+      "decision": "ANSWER"
+    },
+    {
+      "phase": "cold",
+      "run": 1,
+      "case_id": "G-006",
+      "elapsed_ms": 140,
+      "decision": "ANSWER"
+    },
+    {
+      "phase": "cold",
+      "run": 1,
+      "case_id": "G-007",
+      "elapsed_ms": 1145,
+      "decision": "ANSWER"
+    },
+    {
+      "phase": "cold",
+      "run": 1,
+      "case_id": "G-008",
+      "elapsed_ms": 1311,
+      "decision": "ANSWER"
+    },
+    {
+      "phase": "cold",
+      "run": 1,
+      "case_id": "G-009",
+      "elapsed_ms": 4557,
+      "decision": "ANSWER"
+    },
+    {
+      "phase": "cold",
+      "run": 1,
+      "case_id": "G-010",
+      "elapsed_ms": 304,
+      "decision": "ANSWER"
+    },
+    {
+      "phase": "cold",
+      "run": 1,
+      "case_id": "G-011",
+      "elapsed_ms": 127,
+      "decision": "ANSWER"
+    },
+    {
+      "phase": "cold",
+      "run": 1,
+      "case_id": "G-012",
+      "elapsed_ms": 78,
+      "decision": "ANSWER"
+    },
+    {
+      "phase": "cold",
+      "run": 1,
+      "case_id": "G-013",
+      "elapsed_ms": 286,
+      "decision": "ANSWER"
+    },
+    {
+      "phase": "cold",
+      "run": 1,
+      "case_id": "G-014",
+      "elapsed_ms": 306,
+      "decision": "ANSWER"
+    },
+    {
+      "phase": "cold",
+      "run": 1,
+      "case_id": "G-015",
+      "elapsed_ms": 1419,
+      "decision": "ANSWER"
+    },
+    {
+      "phase": "cold",
+      "run": 1,
+      "case_id": "G-016",
+      "elapsed_ms": 179,
+      "decision": "ANSWER"
+    },
+    {
+      "phase": "cold",
+      "run": 1,
+      "case_id": "G-017",
+      "elapsed_ms": 151,
+      "decision": "ANSWER"
+    },
+    {
+      "phase": "cold",
+      "run": 1,
+      "case_id": "G-018",
+      "elapsed_ms": 333,
+      "decision": "ANSWER"
+    },
+    {
+      "phase": "cold",
+      "run": 1,
+      "case_id": "G-019",
+      "elapsed_ms": 357,
+      "decision": "ABSTAIN"
+    },
+    {
+      "phase": "cold",
+      "run": 1,
+      "case_id": "G-020",
+      "elapsed_ms": 276,
+      "decision": "ANSWER"
+    },
+    {
+      "phase": "cold",
+      "run": 1,
+      "case_id": "G-021",
+      "elapsed_ms": 277,
+      "decision": "ABSTAIN"
+    },
+    {
+      "phase": "cold",
+      "run": 1,
+      "case_id": "G-022",
+      "elapsed_ms": 359,
+      "decision": "ANSWER"
+    },
+    {
+      "phase": "cold",
+      "run": 1,
+      "case_id": "G-023",
+      "elapsed_ms": 252,
+      "decision": "ABSTAIN"
+    },
+    {
+      "phase": "cold",
+      "run": 1,
+      "case_id": "G-024",
+      "elapsed_ms": 16,
+      "decision": "ASK"
+    },
+    {
+      "phase": "cold",
+      "run": 1,
+      "case_id": "G-025",
+      "elapsed_ms": 14,
+      "decision": "ASK"
+    },
+    {
+      "phase": "cold",
+      "run": 1,
+      "case_id": "G-026",
+      "elapsed_ms": 15,
+      "decision": "ASK"
+    },
+    {
+      "phase": "cold",
+      "run": 1,
+      "case_id": "G-027",
+      "elapsed_ms": 16,
+      "decision": "ASK"
+    },
+    {
+      "phase": "cold",
+      "run": 1,
+      "case_id": "G-028",
+      "elapsed_ms": 42,
+      "decision": "ABSTAIN"
+    },
+    {
+      "phase": "cold",
+      "run": 1,
+      "case_id": "G-029",
+      "elapsed_ms": 63,
+      "decision": "ABSTAIN"
+    },
+    {
+      "phase": "cold",
+      "run": 1,
+      "case_id": "G-030",
+      "elapsed_ms": 60,
+      "decision": "ABSTAIN"
+    },
+    {
+      "phase": "cold",
+      "run": 1,
+      "case_id": "G-031",
+      "elapsed_ms": 18,
+      "decision": "ABSTAIN"
+    },
+    {
+      "phase": "cold",
+      "run": 1,
+      "case_id": "G-032",
+      "elapsed_ms": 12,
+      "decision": "ABSTAIN"
+    },
+    {
+      "phase": "cold",
+      "run": 1,
+      "case_id": "G-033",
+      "elapsed_ms": 11,
+      "decision": "ABSTAIN"
+    },
+    {
+      "phase": "cold",
+      "run": 1,
+      "case_id": "G-034",
+      "elapsed_ms": 13,
+      "decision": "ABSTAIN"
+    },
+    {
+      "phase": "cold",
+      "run": 1,
+      "case_id": "G-035",
+      "elapsed_ms": 14,
+      "decision": "ABSTAIN"
+    },
+    {
+      "phase": "cold",
+      "run": 1,
+      "case_id": "G-036",
+      "elapsed_ms": 1051,
+      "decision": "ANSWER"
+    },
+    {
+      "phase": "cold",
+      "run": 1,
+      "case_id": "G-037",
+      "elapsed_ms": 993,
+      "decision": "ANSWER"
+    },
+    {
+      "phase": "cold",
+      "run": 1,
+      "case_id": "G-038",
+      "elapsed_ms": 543,
+      "decision": "ABSTAIN"
+    },
+    {
+      "phase": "cold",
+      "run": 1,
+      "case_id": "G-039",
+      "elapsed_ms": 1124,
+      "decision": "ANSWER"
+    },
+    {
+      "phase": "cold",
+      "run": 1,
+      "case_id": "G-040",
+      "elapsed_ms": 183,
+      "decision": "ANSWER"
+    },
+    {
+      "phase": "cold",
+      "run": 1,
+      "case_id": "G-041",
+      "elapsed_ms": 101,
+      "decision": "ANSWER"
+    },
+    {
+      "phase": "cold",
+      "run": 1,
+      "case_id": "G-042",
+      "elapsed_ms": 1768,
+      "decision": "ANSWER"
+    },
+    {
+      "phase": "cold",
+      "run": 1,
+      "case_id": "G-043",
+      "elapsed_ms": 110,
+      "decision": "ABSTAIN"
+    },
+    {
+      "phase": "cold",
+      "run": 1,
+      "case_id": "G-044",
+      "elapsed_ms": 1237,
+      "decision": "ANSWER"
+    },
+    {
+      "phase": "cold",
+      "run": 1,
+      "case_id": "G-045",
+      "elapsed_ms": 74,
+      "decision": "ABSTAIN"
+    },
+    {
+      "phase": "cold",
+      "run": 1,
+      "case_id": "G-046",
+      "elapsed_ms": 171,
+      "decision": "ANSWER"
+    },
+    {
+      "phase": "cold",
+      "run": 1,
+      "case_id": "G-047",
+      "elapsed_ms": 20,
+      "decision": "ABSTAIN"
+    },
+    {
+      "phase": "cold",
+      "run": 1,
+      "case_id": "G-048",
+      "elapsed_ms": 1143,
+      "decision": "ANSWER"
+    },
+    {
+      "phase": "cold",
+      "run": 1,
+      "case_id": "G-049",
+      "elapsed_ms": 25,
+      "decision": "ASK"
+    },
+    {
+      "phase": "cold",
+      "run": 1,
+      "case_id": "G-050",
+      "elapsed_ms": 41,
+      "decision": "ASK"
+    },
+    {
+      "phase": "warm",
+      "run": 1,
+      "case_id": "G-001",
+      "elapsed_ms": 141,
+      "decision": "ANSWER"
+    },
+    {
+      "phase": "warm",
+      "run": 1,
+      "case_id": "G-002",
+      "elapsed_ms": 94,
+      "decision": "ANSWER"
+    },
+    {
+      "phase": "warm",
+      "run": 1,
+      "case_id": "G-003",
+      "elapsed_ms": 146,
+      "decision": "ANSWER"
+    },
+    {
+      "phase": "warm",
+      "run": 1,
+      "case_id": "G-004",
+      "elapsed_ms": 1184,
+      "decision": "ANSWER"
+    },
+    {
+      "phase": "warm",
+      "run": 1,
+      "case_id": "G-005",
+      "elapsed_ms": 84,
+      "decision": "ANSWER"
+    },
+    {
+      "phase": "warm",
+      "run": 1,
+      "case_id": "G-006",
+      "elapsed_ms": 145,
+      "decision": "ANSWER"
+    },
+    {
+      "phase": "warm",
+      "run": 1,
+      "case_id": "G-007",
+      "elapsed_ms": 1081,
+      "decision": "ANSWER"
+    },
+    {
+      "phase": "warm",
+      "run": 1,
+      "case_id": "G-008",
+      "elapsed_ms": 1286,
+      "decision": "ANSWER"
+    },
+    {
+      "phase": "warm",
+      "run": 1,
+      "case_id": "G-009",
+      "elapsed_ms": 4496,
+      "decision": "ANSWER"
+    },
+    {
+      "phase": "warm",
+      "run": 1,
+      "case_id": "G-010",
+      "elapsed_ms": 307,
+      "decision": "ANSWER"
+    },
+    {
+      "phase": "warm",
+      "run": 1,
+      "case_id": "G-011",
+      "elapsed_ms": 127,
+      "decision": "ANSWER"
+    },
+    {
+      "phase": "warm",
+      "run": 1,
+      "case_id": "G-012",
+      "elapsed_ms": 78,
+      "decision": "ANSWER"
+    },
+    {
+      "phase": "warm",
+      "run": 1,
+      "case_id": "G-013",
+      "elapsed_ms": 332,
+      "decision": "ANSWER"
+    },
+    {
+      "phase": "warm",
+      "run": 1,
+      "case_id": "G-014",
+      "elapsed_ms": 276,
+      "decision": "ANSWER"
+    },
+    {
+      "phase": "warm",
+      "run": 1,
+      "case_id": "G-015",
+      "elapsed_ms": 1495,
+      "decision": "ANSWER"
+    },
+    {
+      "phase": "warm",
+      "run": 1,
+      "case_id": "G-016",
+      "elapsed_ms": 204,
+      "decision": "ANSWER"
+    },
+    {
+      "phase": "warm",
+      "run": 1,
+      "case_id": "G-017",
+      "elapsed_ms": 142,
+      "decision": "ANSWER"
+    },
+    {
+      "phase": "warm",
+      "run": 1,
+      "case_id": "G-018",
+      "elapsed_ms": 311,
+      "decision": "ANSWER"
+    },
+    {
+      "phase": "warm",
+      "run": 1,
+      "case_id": "G-019",
+      "elapsed_ms": 379,
+      "decision": "ABSTAIN"
+    },
+    {
+      "phase": "warm",
+      "run": 1,
+      "case_id": "G-020",
+      "elapsed_ms": 920,
+      "decision": "ANSWER"
+    },
+    {
+      "phase": "warm",
+      "run": 1,
+      "case_id": "G-021",
+      "elapsed_ms": 564,
+      "decision": "ABSTAIN"
+    },
+    {
+      "phase": "warm",
+      "run": 1,
+      "case_id": "G-022",
+      "elapsed_ms": 713,
+      "decision": "ANSWER"
+    },
+    {
+      "phase": "warm",
+      "run": 1,
+      "case_id": "G-023",
+      "elapsed_ms": 446,
+      "decision": "ABSTAIN"
+    },
+    {
+      "phase": "warm",
+      "run": 1,
+      "case_id": "G-024",
+      "elapsed_ms": 16,
+      "decision": "ASK"
+    },
+    {
+      "phase": "warm",
+      "run": 1,
+      "case_id": "G-025",
+      "elapsed_ms": 13,
+      "decision": "ASK"
+    },
+    {
+      "phase": "warm",
+      "run": 1,
+      "case_id": "G-026",
+      "elapsed_ms": 13,
+      "decision": "ASK"
+    },
+    {
+      "phase": "warm",
+      "run": 1,
+      "case_id": "G-027",
+      "elapsed_ms": 14,
+      "decision": "ASK"
+    },
+    {
+      "phase": "warm",
+      "run": 1,
+      "case_id": "G-028",
+      "elapsed_ms": 39,
+      "decision": "ABSTAIN"
+    },
+    {
+      "phase": "warm",
+      "run": 1,
+      "case_id": "G-029",
+      "elapsed_ms": 49,
+      "decision": "ABSTAIN"
+    },
+    {
+      "phase": "warm",
+      "run": 1,
+      "case_id": "G-030",
+      "elapsed_ms": 49,
+      "decision": "ABSTAIN"
+    },
+    {
+      "phase": "warm",
+      "run": 1,
+      "case_id": "G-031",
+      "elapsed_ms": 18,
+      "decision": "ABSTAIN"
+    },
+    {
+      "phase": "warm",
+      "run": 1,
+      "case_id": "G-032",
+      "elapsed_ms": 16,
+      "decision": "ABSTAIN"
+    },
+    {
+      "phase": "warm",
+      "run": 1,
+      "case_id": "G-033",
+      "elapsed_ms": 17,
+      "decision": "ABSTAIN"
+    },
+    {
+      "phase": "warm",
+      "run": 1,
+      "case_id": "G-034",
+      "elapsed_ms": 15,
+      "decision": "ABSTAIN"
+    },
+    {
+      "phase": "warm",
+      "run": 1,
+      "case_id": "G-035",
+      "elapsed_ms": 16,
+      "decision": "ABSTAIN"
+    },
+    {
+      "phase": "warm",
+      "run": 1,
+      "case_id": "G-036",
+      "elapsed_ms": 1195,
+      "decision": "ANSWER"
+    },
+    {
+      "phase": "warm",
+      "run": 1,
+      "case_id": "G-037",
+      "elapsed_ms": 1155,
+      "decision": "ANSWER"
+    },
+    {
+      "phase": "warm",
+      "run": 1,
+      "case_id": "G-038",
+      "elapsed_ms": 159,
+      "decision": "ABSTAIN"
+    },
+    {
+      "phase": "warm",
+      "run": 1,
+      "case_id": "G-039",
+      "elapsed_ms": 1225,
+      "decision": "ANSWER"
+    },
+    {
+      "phase": "warm",
+      "run": 1,
+      "case_id": "G-040",
+      "elapsed_ms": 256,
+      "decision": "ANSWER"
+    },
+    {
+      "phase": "warm",
+      "run": 1,
+      "case_id": "G-041",
+      "elapsed_ms": 133,
+      "decision": "ANSWER"
+    },
+    {
+      "phase": "warm",
+      "run": 1,
+      "case_id": "G-042",
+      "elapsed_ms": 2503,
+      "decision": "ANSWER"
+    },
+    {
+      "phase": "warm",
+      "run": 1,
+      "case_id": "G-043",
+      "elapsed_ms": 135,
+      "decision": "ABSTAIN"
+    },
+    {
+      "phase": "warm",
+      "run": 1,
+      "case_id": "G-044",
+      "elapsed_ms": 1595,
+      "decision": "ANSWER"
+    },
+    {
+      "phase": "warm",
+      "run": 1,
+      "case_id": "G-045",
+      "elapsed_ms": 148,
+      "decision": "ABSTAIN"
+    },
+    {
+      "phase": "warm",
+      "run": 1,
+      "case_id": "G-046",
+      "elapsed_ms": 310,
+      "decision": "ANSWER"
+    },
+    {
+      "phase": "warm",
+      "run": 1,
+      "case_id": "G-047",
+      "elapsed_ms": 23,
+      "decision": "ABSTAIN"
+    },
+    {
+      "phase": "warm",
+      "run": 1,
+      "case_id": "G-048",
+      "elapsed_ms": 1337,
+      "decision": "ANSWER"
+    },
+    {
+      "phase": "warm",
+      "run": 1,
+      "case_id": "G-049",
+      "elapsed_ms": 31,
+      "decision": "ASK"
+    },
+    {
+      "phase": "warm",
+      "run": 1,
+      "case_id": "G-050",
+      "elapsed_ms": 24,
+      "decision": "ASK"
+    }
+  ]
+}

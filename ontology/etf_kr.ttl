@@ -1,0 +1,20 @@
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix pf: <http://miraeasset.product-finder/ontology/common#> .
+@prefix etf: <http://miraeasset.product-finder/ontology/etf_kr#> .
+
+etf:KoreanETF a owl:Class ;
+  rdfs:subClassOf pf:ETF ;
+  rdfs:label "Korean ETF"@en, "국내 ETF"@ko .
+
+etf:expenseRatio a pf:Metric ;
+  rdfs:label "expense ratio"@en, "보수"@ko ;
+  rdfs:comment "maps to cu_charge_rt, partial coverage"@en .
+
+etf:baseIndex a pf:Metric ;
+  rdfs:label "base index"@en, "기초지수"@ko ;
+  rdfs:comment "maps to cu_base_index, partial coverage"@en .
+
+etf:return1d a pf:Metric ;
+  rdfs:label "1d return"@en, "1일 수익률"@ko ;
+  rdfs:comment "maps to du_er_1d"@en .

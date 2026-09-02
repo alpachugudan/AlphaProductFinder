@@ -1,0 +1,97 @@
+{
+  "schema_version": "benchmark-report-1.0",
+  "provider": "mock",
+  "dataset_version": "2026-07-11-baseline",
+  "case_count": 5,
+  "runs_per_phase": 1,
+  "thresholds_ms": {
+    "total_p50": 8000,
+    "total_p95": 20000
+  },
+  "summary": {
+    "cold": {
+      "count": 5,
+      "p50_ms": 1053,
+      "p95_ms": 4334,
+      "max_ms": 4334
+    },
+    "warm": {
+      "count": 5,
+      "p50_ms": 1155,
+      "p95_ms": 4187,
+      "max_ms": 4187
+    }
+  },
+  "samples": [
+    {
+      "phase": "cold",
+      "run": 1,
+      "case_id": "G-004",
+      "elapsed_ms": 1460,
+      "decision": "ANSWER"
+    },
+    {
+      "phase": "cold",
+      "run": 1,
+      "case_id": "G-009",
+      "elapsed_ms": 4334,
+      "decision": "ANSWER"
+    },
+    {
+      "phase": "cold",
+      "run": 1,
+      "case_id": "G-018",
+      "elapsed_ms": 339,
+      "decision": "ANSWER"
+    },
+    {
+      "phase": "cold",
+      "run": 1,
+      "case_id": "G-039",
+      "elapsed_ms": 1039,
+      "decision": "ANSWER"
+    },
+    {
+      "phase": "cold",
+      "run": 1,
+      "case_id": "G-048",
+      "elapsed_ms": 1053,
+      "decision": "ANSWER"
+    },
+    {
+      "phase": "warm",
+      "run": 1,
+      "case_id": "G-004",
+      "elapsed_ms": 1295,
+      "decision": "ANSWER"
+    },
+    {
+      "phase": "warm",
+      "run": 1,
+      "case_id": "G-009",
+      "elapsed_ms": 4187,
+      "decision": "ANSWER"
+    },
+    {
+      "phase": "warm",
+      "run": 1,
+      "case_id": "G-018",
+      "elapsed_ms": 277,
+      "decision": "ANSWER"
+    },
+    {
+      "phase": "warm",
+      "run": 1,
+      "case_id": "G-039",
+      "elapsed_ms": 904,
+      "decision": "ANSWER"
+    },
+    {
+      "phase": "warm",
+      "run": 1,
+      "case_id": "G-048",
+      "elapsed_ms": 1155,
+      "decision": "ANSWER"
+    }
+  ]
+}

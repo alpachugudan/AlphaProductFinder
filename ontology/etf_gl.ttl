@@ -1,0 +1,20 @@
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix pf: <http://miraeasset.product-finder/ontology/common#> .
+@prefix etf: <http://miraeasset.product-finder/ontology/etf_global#> .
+
+etf:GlobalETF a owl:Class ;
+  rdfs:subClassOf pf:ETF ;
+  rdfs:label "Global ETF"@en, "해외 ETF"@ko .
+
+etf:nav a pf:Metric ;
+  rdfs:label "NAV"@en ;
+  rdfs:comment "maps to du_last_nav with du_nav_base_dt"@en .
+
+etf:closePrice a pf:Metric ;
+  rdfs:label "close price"@en, "종가"@ko ;
+  rdfs:comment "maps to du_clpr with du_clpr_base_dt"@en .
+
+etf:navDiscount a pf:Metric ;
+  rdfs:label "NAV discount"@en, "NAV 괴리율"@ko ;
+  rdfs:comment "rank blocked when DATE_MISMATCH"@en .

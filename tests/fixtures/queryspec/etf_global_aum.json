@@ -1,0 +1,16 @@
+{
+  "version": "1.0",
+  "intent": "FILTER",
+  "product_families": ["ETF_GLOBAL"],
+  "entities": [],
+  "filters": [
+    {"field": "aum", "operator": "GTE", "value": 100000000000}
+  ],
+  "relationship_filters": [],
+  "metrics": ["aum", "return_1d"],
+  "preferences": [],
+  "sort": [],
+  "limit": 5,
+  "as_of_requirement": "SHOW_FIELD_DATE",
+  "missing_policy": "EXCLUDE_AND_DISCLOSE"
+}
