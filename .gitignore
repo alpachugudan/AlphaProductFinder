@@ -22,3 +22,4 @@ build/
 source-data/
 .hcx-api
 backups/
+artifacts/remote-golden/
