@@ -21,7 +21,6 @@ from app.query.enums import (
 )
 from app.query.models import QuerySpec
 from app.query.registry import get_field_registry
-from app.query.validator import QuerySpecValidationError, validate_queryspec_or_raise
 
 PROMPT_DIR = PROJECT_ROOT / "app" / "llm" / "prompts"
 QUERY_SYSTEM_PROMPT = (PROMPT_DIR / "queryspec_system_v1.txt").read_text(encoding="utf-8")
@@ -39,6 +38,14 @@ class HyperClovaProvider:
         self.prompt_version = settings.hcx_prompt_version
 
     async def parse_query(self, question: str) -> QuerySpec:
+        """Parse only the transport/schema contract.
+
+        A syntactically valid but semantically incomplete QuerySpec is not an HCX
+        failure.  The policy engine deliberately turns those cases into ASK or
+        ABSTAIN decisions after parsing.  Rejecting them here made normal
+        clarification requests look like a 503 and needlessly repeated a
+        billable HCX request.
+        """
         correction = False
         for _ in range(2):
             completion = await self._client.complete(
@@ -46,10 +53,8 @@ class HyperClovaProvider:
                 payload=self._queryspec_payload(question, correction=correction),
             )
             try:
-                spec = QuerySpec.model_validate_json(completion.content)
-                validate_queryspec_or_raise(spec, get_field_registry())
-                return spec
-            except (ValidationError, QuerySpecValidationError):
+                return QuerySpec.model_validate_json(completion.content)
+            except ValidationError:
                 correction = True
         raise HcxResponseError()
 

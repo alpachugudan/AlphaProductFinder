@@ -38,7 +38,7 @@ class Settings(BaseSettings):
     hcx_connect_timeout_seconds: float = 5.0
     hcx_read_timeout_seconds: float = 20.0
     hcx_max_retries: int = 1
-    hcx_prompt_version: str = "hcx-v1"
+    hcx_prompt_version: str = "hcx-v2"
     hcx_startup_smoke_enabled: bool = False
     billing_mode: BillingMode = "credit_only"
     credit_balance_confirmed: bool = False

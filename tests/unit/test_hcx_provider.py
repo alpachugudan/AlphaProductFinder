@@ -140,3 +140,32 @@ async def test_hyperclova_provider_corrects_invalid_queryspec_once() -> None:
     first_body = stub.payloads[0]
     assert "responseFormat" in first_body
     assert first_body["thinking"] == {"effort": "none"}
+
+
+@pytest.mark.asyncio(loop_scope="module")
+async def test_hyperclova_provider_defers_semantic_queryspec_issues_to_policy() -> None:
+    semantically_unsupported = json.dumps(
+        {
+            "version": "1.0",
+            "intent": "FILTER",
+            "product_families": ["BOND_KR"],
+            "entities": [],
+            "filters": [
+                {"field": "investment_region", "operator": "CONTAINS", "value": "미국"}
+            ],
+            "relationship_filters": [],
+            "metrics": [],
+            "preferences": [],
+            "sort": [],
+            "limit": 5,
+            "as_of_requirement": "SHOW_FIELD_DATE",
+            "missing_policy": "EXCLUDE_AND_DISCLOSE",
+        }
+    )
+    stub = StubHcxClient([semantically_unsupported])
+    provider = HyperClovaProvider(_settings(), client=stub)  # type: ignore[arg-type]
+
+    spec = await provider.parse_query("채권에 투자지역 조건을 적용")
+
+    assert spec.filters[0].field == "investment_region"
+    assert len(stub.payloads) == 1
