@@ -175,6 +175,7 @@ def _validate_operators_and_values(
 ) -> list[ValidationIssue]:
     issues: list[ValidationIssue] = []
     for idx, clause in enumerate(spec.filters):
+        issues.extend(_validate_filter_clause_shape(clause, idx))
         definition = registry.get(clause.field)
         if definition is None:
             continue
@@ -205,6 +206,54 @@ def _validate_operators_and_values(
             )
         )
     return issues
+
+
+def _validate_filter_clause_shape(clause: Any, index: int) -> list[ValidationIssue]:
+    """Policy validation, not parser rejection, for LLM-generated clause shapes."""
+    path = f"$.filters[{index}].value"
+    if clause.operator in {Operator.IS_NULL, Operator.NOT_NULL}:
+        if clause.value is not None:
+            return [
+                ValidationIssue(
+                    code="FILTER_VALUE_MUST_BE_EMPTY",
+                    message=f"{clause.operator} must not include value",
+                    json_path=path,
+                    askable=True,
+                )
+            ]
+        return []
+    if clause.operator == Operator.BETWEEN and (
+        not isinstance(clause.value, list) or len(clause.value) != 2
+    ):
+        return [
+            ValidationIssue(
+                code="INVALID_FILTER_VALUE_SHAPE",
+                message="BETWEEN requires exactly two values",
+                json_path=path,
+                askable=True,
+            )
+        ]
+    if clause.operator == Operator.IN and (
+        not isinstance(clause.value, list) or len(clause.value) == 0
+    ):
+        return [
+            ValidationIssue(
+                code="INVALID_FILTER_VALUE_SHAPE",
+                message="IN requires a non-empty array",
+                json_path=path,
+                askable=True,
+            )
+        ]
+    if clause.value is None:
+        return [
+            ValidationIssue(
+                code="MISSING_FILTER_VALUE",
+                message=f"{clause.operator} requires value",
+                json_path=path,
+                askable=True,
+            )
+        ]
+    return []
 
 
 def _validate_value_type(

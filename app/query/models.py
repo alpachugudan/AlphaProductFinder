@@ -30,28 +30,6 @@ class FilterClause(BaseModel):
     operator: Operator
     value: Any | None = None
 
-    @model_validator(mode="after")
-    def validate_value_shape(self) -> FilterClause:
-        if self.operator in {Operator.IS_NULL, Operator.NOT_NULL}:
-            if self.value is not None:
-                msg = f"{self.operator} must not include value"
-                raise ValueError(msg)
-            return self
-        if self.operator == Operator.BETWEEN:
-            if not isinstance(self.value, list) or len(self.value) != 2:
-                msg = "BETWEEN requires exactly two values"
-                raise ValueError(msg)
-            return self
-        if self.operator == Operator.IN:
-            if not isinstance(self.value, list) or len(self.value) == 0:
-                msg = "IN requires a non-empty array"
-                raise ValueError(msg)
-            return self
-        if self.value is None:
-            msg = f"{self.operator} requires value"
-            raise ValueError(msg)
-        return self
-
 
 class RelationshipFilterClause(BaseModel):
     model_config = ConfigDict(extra="forbid")

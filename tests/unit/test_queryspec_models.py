@@ -4,8 +4,10 @@ import json
 from pathlib import Path
 
 import pytest
-from app.query.enums import Intent, Operator
+from app.query.enums import Intent, Operator, ProductFamily
 from app.query.models import FilterClause, QuerySpec
+from app.query.registry import get_field_registry
+from app.query.validator import validate_queryspec
 from pydantic import ValidationError
 
 FIXTURE_DIR = Path(__file__).resolve().parent.parent / "fixtures" / "queryspec"
@@ -38,13 +40,27 @@ def test_limit_out_of_range() -> None:
 
 
 def test_between_requires_two_values() -> None:
-    with pytest.raises(ValidationError):
-        FilterClause(field="remaining_days", operator=Operator.BETWEEN, value=[1])
+    clause = FilterClause(field="remaining_days", operator=Operator.BETWEEN, value=[1])
+    spec = QuerySpec(
+        intent=Intent.FILTER,
+        product_families=[ProductFamily.BOND_KR],
+        filters=[clause],
+    )
+    assert "INVALID_FILTER_VALUE_SHAPE" in {
+        issue.code for issue in validate_queryspec(spec, get_field_registry())
+    }
 
 
 def test_null_operators_reject_value() -> None:
-    with pytest.raises(ValidationError):
-        FilterClause(field="remaining_days", operator=Operator.IS_NULL, value=1)
+    clause = FilterClause(field="remaining_days", operator=Operator.IS_NULL, value=1)
+    spec = QuerySpec(
+        intent=Intent.FILTER,
+        product_families=[ProductFamily.BOND_KR],
+        filters=[clause],
+    )
+    assert "FILTER_VALUE_MUST_BE_EMPTY" in {
+        issue.code for issue in validate_queryspec(spec, get_field_registry())
+    }
 
 
 def test_json_schema_snapshot() -> None:
