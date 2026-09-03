@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from app.agent.decision import Decision, DecisionState
 from app.evidence.answer_guard import guard_answer
+from app.evidence.answer_service import _safe_answer_fallback
 from app.evidence.models import EvidenceBundle
 
 
@@ -65,3 +66,12 @@ def test_guard_blocks_wrong_decision_prefix() -> None:
     )
     assert not result.passed
     assert result.reason_codes == ["STATE_PREFIX_MISMATCH"]
+
+
+def test_safe_fallback_passes_answer_guard() -> None:
+    decision = _decision(DecisionState.ANSWER)
+    fallback = _safe_answer_fallback(decision)
+
+    result = guard_answer(fallback, decision=decision, evidence_bundles=[])
+
+    assert result.passed

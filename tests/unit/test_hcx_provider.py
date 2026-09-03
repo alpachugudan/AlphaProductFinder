@@ -136,7 +136,7 @@ async def test_hyperclova_provider_corrects_invalid_queryspec_once() -> None:
 
     assert spec.intent.value == "FILTER_AND_RANK"
     assert len(stub.payloads) == 2
-    assert "prior output was invalid" in stub.payloads[1]["messages"][1]["content"]
+    assert "failed JSON Schema validation" in stub.payloads[1]["messages"][1]["content"]
     first_body = stub.payloads[0]
     assert "responseFormat" in first_body
     assert first_body["thinking"] == {"effort": "none"}

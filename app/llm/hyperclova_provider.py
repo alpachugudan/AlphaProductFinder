@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import logging
 from typing import Any
 
 from pydantic import ValidationError
@@ -25,6 +26,7 @@ from app.query.registry import get_field_registry
 PROMPT_DIR = PROJECT_ROOT / "app" / "llm" / "prompts"
 QUERY_SYSTEM_PROMPT = (PROMPT_DIR / "queryspec_system_v1.txt").read_text(encoding="utf-8")
 ANSWER_SYSTEM_PROMPT = (PROMPT_DIR / "answer_system_v1.txt").read_text(encoding="utf-8")
+logger = logging.getLogger(__name__)
 
 
 class HyperClovaProvider:
@@ -47,14 +49,28 @@ class HyperClovaProvider:
         billable HCX request.
         """
         correction = False
-        for _ in range(2):
+        correction_issues: list[str] = []
+        for attempt in range(2):
             completion = await self._client.complete(
                 model=self._settings.hcx_intent_model,
-                payload=self._queryspec_payload(question, correction=correction),
+                payload=self._queryspec_payload(
+                    question,
+                    correction=correction,
+                    correction_issues=correction_issues,
+                ),
             )
             try:
                 return QuerySpec.model_validate_json(completion.content)
-            except ValidationError:
+            except ValidationError as exc:
+                correction_issues = _validation_error_summary(exc)
+                logger.warning(
+                    "HCX QuerySpec schema validation failed",
+                    extra={
+                        "attempt": attempt + 1,
+                        "validation_issue_count": len(correction_issues),
+                        "validation_issues": correction_issues,
+                    },
+                )
                 correction = True
         raise HcxResponseError()
 
@@ -120,12 +136,20 @@ class HyperClovaProvider:
         )
         return {"query": query, "answer": answer}
 
-    def _queryspec_payload(self, question: str, *, correction: bool) -> dict[str, Any]:
+    def _queryspec_payload(
+        self,
+        question: str,
+        *,
+        correction: bool,
+        correction_issues: list[str] | None = None,
+    ) -> dict[str, Any]:
         correction_message = ""
         if correction:
+            issue_text = ", ".join(correction_issues or ["unknown schema error"])
             correction_message = (
-                "\nThe prior output was invalid. Return the complete JSON object again, "
-                "with no extra keys."
+                "\nThe prior output failed JSON Schema validation. Return the complete JSON object "
+                "again with no extra keys. Correct these locations/types: "
+                f"{issue_text}. Every required top-level array must be present, even when empty."
             )
         return {
             "messages": [
@@ -343,3 +367,13 @@ def _queryspec_schema() -> dict[str, Any]:
             "missing_policy",
         ],
     }
+
+
+def _validation_error_summary(exc: ValidationError) -> list[str]:
+    """Return location/type only; never put HCX content or user text into logs."""
+    summaries: list[str] = []
+    for item in exc.errors(include_input=False):
+        location = ".".join(str(part) for part in item.get("loc", ())) or "root"
+        error_type = str(item.get("type", "validation_error"))
+        summaries.append(f"{location}:{error_type}")
+    return summaries[:12]

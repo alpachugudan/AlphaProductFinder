@@ -27,6 +27,12 @@ def parse_args() -> argparse.Namespace:
     )
     parser.add_argument("--base-url", required=True)
     parser.add_argument("--allow-billable-hcx", action="store_true")
+    parser.add_argument(
+        "--case",
+        action="append",
+        dest="case_ids",
+        help="Run one Golden case by ID; repeat this option for a small approved sample.",
+    )
     parser.add_argument("--timeout", type=float, default=130.0)
     parser.add_argument(
         "--artifacts-dir",
@@ -117,6 +123,12 @@ def main() -> int:
     cases = payload.get("cases") if isinstance(payload, dict) else None
     if not isinstance(cases, list) or len(cases) != 50:
         raise SystemExit("CONFIG_ERROR: expected exactly 50 Golden cases")
+    if args.case_ids:
+        selected = set(args.case_ids)
+        cases = [case for case in cases if isinstance(case, dict) and case.get("id") in selected]
+        found = {str(case["id"]) for case in cases}
+        if found != selected:
+            raise SystemExit("CONFIG_ERROR: unknown --case id")
 
     base_url = args.base_url.rstrip("/")
     results: list[dict[str, object]] = []

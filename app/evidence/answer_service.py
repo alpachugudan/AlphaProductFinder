@@ -26,7 +26,6 @@ from app.evidence.serializer import serialize_retrieved_context
 from app.evidence.think_trace import build_execution_trace, serialize_think_trace
 from app.external.ingestion import MANIFEST_PATH, compute_manifest_hash
 from app.external.models import ExternalIngestionRun, ExternalIngestionStatus
-from app.llm.errors import HcxAnswerIntegrityError
 from app.llm.factory import get_llm_provider
 from app.query.models import QuerySpec
 from app.retrieval.models import RetrievalContext
@@ -157,7 +156,17 @@ class AgentAnswerService:
                 relation_evidence=standalone_relations,
             )
             if not guard_result.passed:
-                raise HcxAnswerIntegrityError()
+                logger.warning(
+                    "HCX answer guard failed twice; using deterministic safe fallback",
+                    extra={"guard_reason_codes": guard_result.reason_codes},
+                )
+                answer_text = _safe_answer_fallback(final_decision)
+                guard_result = guard_answer(
+                    answer_text,
+                    decision=final_decision,
+                    evidence_bundles=bundles,
+                    relation_evidence=standalone_relations,
+                )
 
         evidence_hash = validation.evidence_hash if validation else ""
         self._safe_audit(
@@ -221,6 +230,15 @@ class AgentAnswerService:
 
 def _hash_text(value: str) -> str:
     return hashlib.sha256(value.encode("utf-8")).hexdigest()
+
+
+def _safe_answer_fallback(decision: Decision) -> str:
+    """Availability fallback when two generated answers fail the safety guard."""
+    if decision.state == DecisionState.ANSWER:
+        return "ANSWER: 제공된 근거 데이터 기준의 조회 결과입니다."
+    if decision.state == DecisionState.ASK:
+        return "ASK: 조회 조건을 조금 더 구체적으로 알려주세요."
+    return "ABSTAIN: 제공된 데이터와 근거 범위에서는 확인할 수 없습니다."
 
 
 def _external_manifest_hash(session: Session) -> str | None:
