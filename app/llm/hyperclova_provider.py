@@ -20,6 +20,7 @@ from app.query.enums import (
     ProductFamily,
     RelationType,
 )
+from app.query.korean_rule_parser import parse_korean_finance_question
 from app.query.models import QuerySpec
 from app.query.registry import get_field_registry
 
@@ -48,6 +49,16 @@ class HyperClovaProvider:
         clarification requests look like a 503 and needlessly repeated a
         billable HCX request.
         """
+        if spec := parse_korean_finance_question(question):
+            logger.info(
+                "Korean rule parser produced QuerySpec",
+                extra={
+                    "intent": spec.intent.value,
+                    "families": [family.value for family in spec.product_families],
+                },
+            )
+            return spec
+
         correction = False
         correction_issues: list[str] = []
         for attempt in range(2):

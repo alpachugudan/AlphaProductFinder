@@ -132,7 +132,7 @@ async def test_hyperclova_provider_corrects_invalid_queryspec_once() -> None:
     stub = StubHcxClient(["not-json", fixture])
     provider = HyperClovaProvider(_settings(), client=stub)  # type: ignore[arg-type]
 
-    spec = await provider.parse_query("미국 투자 국내 ETF 보수 낮은 순")
+    spec = await provider.parse_query("국내 ETF 중 보수가 가장 낮은 상품 알려줘")
 
     assert spec.intent.value == "FILTER_AND_RANK"
     assert len(stub.payloads) == 2
@@ -165,7 +165,7 @@ async def test_hyperclova_provider_defers_semantic_queryspec_issues_to_policy() 
     stub = StubHcxClient([semantically_unsupported])
     provider = HyperClovaProvider(_settings(), client=stub)  # type: ignore[arg-type]
 
-    spec = await provider.parse_query("채권에 투자지역 조건을 적용")
+    spec = await provider.parse_query("지원하지 않는 채권 조건 테스트")
 
     assert spec.filters[0].field == "investment_region"
     assert len(stub.payloads) == 1
